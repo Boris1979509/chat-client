@@ -7,6 +7,7 @@
                 justify-between
                 border-b border-gray-300
                 p-3
+                h-16
             "
         >
             <selected-chat-info
@@ -36,6 +37,7 @@
                 @sendMessage="onSendMessage"
                 @joinChat="onJoinChat"
                 :is-join="isUserJoin"
+                :isButtonLoading="isButtonLoading"
             />
         </template>
     </main>
@@ -60,13 +62,12 @@ export default {
         const socket = inject('socket')
 
         const clientsCount = ref(0)
+        const isButtonLoading = ref(false)
 
-        /** ONLINE OFFLINE */
-        const userStatus = reactive({})
-        provide('user-status', userStatus)
-        /*--------------------------------*/
-        const allUsersOnline = ref(null)
+        /** ONLINE || OFFLINE */
+        const allUsersOnline = ref([])
         provide('all-users-online', allUsersOnline)
+        /*--------------------------------*/
 
         const isTyping = ref(false)
         let typingTimeout = false
@@ -76,6 +77,9 @@ export default {
         )
         const isProgressStatusMessages = computed(
             () => store.getters['chat/isProgressStatusMessages']
+        )
+        const isProgressStatusSelectedChat = computed(
+            () => store.getters['chat/isProgressStatusSelectedChat']
         )
         const selectedChatId = computed(
             () => store.getters['chat/selectedChatId']
@@ -91,21 +95,31 @@ export default {
         const isUserJoin = computed(() =>
             currentUser.value?.chats.includes(selectedChatId.value)
         )
+        /**  */
+        const m = (chatId, username, userId) => ({ chatId, username, userId })
+
         /** JOIN CHAT */
         const onJoinChat = () => {
-            socket.emit(emitters.JOIN_CHAT, {
-                chatId: selectedChatId.value,
-                username: currentUser.value.username,
-                userId: currentUser.value._id,
-            })
+            isButtonLoading.value = true
+            socket.emit(
+                emitters.JOIN_CHAT,
+                m(
+                    selectedChatId.value,
+                    currentUser.value.username,
+                    currentUser.value._id
+                )
+            )
         }
         /** LEAVE CHAT */
         const onLeaveChat = () => {
-            socket.emit(emitters.LEAVE_CHAT, {
-                chatId: selectedChatId.value,
-                username: currentUser.value.username,
-                userId: currentUser.value._id,
-            })
+            socket.emit(
+                emitters.LEAVE_CHAT,
+                m(
+                    selectedChatId.value,
+                    currentUser.value.username,
+                    currentUser.value._id
+                )
+            )
         }
         const setTyping = () => {
             if (typingTimeout) {
@@ -138,47 +152,44 @@ export default {
                 { root: true }
             )
         }
-
-        /** Set status ONLINE || OFFLINE */
-        const setStatus = (userId, online) => {
-            userStatus['userId'] = userId
-            userStatus['online'] = online
-        }
         /** USER JOIN ROOM */
-        onMounted(async () => {
-            socket.on(listeners.NEW_USER_JOIN, async ({ username, userId }) => {
-                await store.dispatch(
-                    'chat/getSelectedChat',
-                    selectedChatId.value
-                )
-                if (userId !== currentUser.value._id && isUserJoin.value) {
-                    /** Message all users (not current user) in room */
-                    userChatNotify('User join chat', username)
-                } else if (userId === currentUser.value._id) {
-                    await store.dispatch(
-                        'user/getUser',
-                        currentUser.value.email
-                    )
-                    /** Message for current user in room */
-                    userChatNotify('Joined chat')
+        onMounted(() => {
+            socket.on(
+                listeners.NEW_USER_JOIN,
+                async ({ username, userId, chatId }) => {
+                    if (
+                        userId !== currentUser.value._id &&
+                        isUserJoin.value &&
+                        selectedChatId.value === chatId
+                    ) {
+                        userChatNotify('User join chat', username)
+                    } else if (userId === currentUser.value._id) {
+                        await store.dispatch(
+                            'user/getUser',
+                            currentUser.value.email
+                        )
+                        /** Message for current user in room */
+                        userChatNotify('Joined chat')
+                    }
+                    await store.dispatch('chat/getSelectedChat', chatId)
+                    isButtonLoading.value = false
                 }
-            })
+            )
 
             /** USER LEAVE CHAT */
-            socket.on(listeners.USER_LEAVE_CHAT, async (username) => {
-                await store.dispatch(
-                    'chat/getSelectedChat',
-                    selectedChatId.value
-                )
-                userChatNotify('User leave chat', username)
-            })
+            socket.on(
+                listeners.USER_LEAVE_CHAT,
+                async ({ chatId, username }) => {
+                    /** If current chat, show all message */
+                    if (selectedChatId.value === chatId && isUserJoin.value) {
+                        userChatNotify('User leave chat', username)
+                    }
+                    await store.dispatch('chat/getSelectedChat', chatId)
+                }
+            )
             /** REFRESH CURRENT USER AFTER LEAVE CHAT */
             socket.on(listeners.USER_REFRESH_AFTER_LEAVE_CHAT, async () => {
                 await store.dispatch('user/getUser', currentUser.value.email)
-                await store.dispatch(
-                    'chat/getSelectedChat',
-                    selectedChatId.value
-                )
                 userChatNotify('Left chat')
             })
             /** User typing */
@@ -199,30 +210,28 @@ export default {
             /** ONLINE */
             socket.on(listeners.USER_ONLINE, ({ userId, username }) => {
                 if (userId !== currentUser.value._id) {
-                    userChatNotify('User join chat', username)
+                    userChatNotify('User online', username)
                 }
-                socket.emit(
-                    emitters.CLIENTS_COUNT_ONLINE_IN_ROOM,
-                    selectedChatId.value
-                )
-                setStatus(userId, true)
+                socket.emit(emitters.FETCH_COUNT_SOCKETS_IN_ROOM, {
+                    chatId: selectedChatId.value,
+                    state: true, // emit all sockets
+                })
             })
             /** OFFLINE */
             socket.on(listeners.USER_OFFLINE, async ({ userId, username }) => {
                 if (userId !== currentUser.value._id) {
-                    userChatNotify('User leave chat', username)
+                    userChatNotify('User offline', username)
                 }
-                socket.emit(
-                    emitters.CLIENTS_COUNT_ONLINE_IN_ROOM,
-                    selectedChatId.value
-                )
-                setStatus(userId, false)
+                socket.emit(emitters.FETCH_COUNT_SOCKETS_IN_ROOM, {
+                    chatId: selectedChatId.value,
+                    state: true, // emit all sockets
+                })
             })
-
+            /** FETCH COUNT USERS IN CHAT ROOM */
             socket.on(
-                listeners.CLIENTS_COUNT_ONLINE_IN_ROOM,
-                ({ chatId, count, ids }) => {
-                    if (selectedChatId.value === chatId) {
+                listeners.FETCH_COUNT_SOCKETS_IN_ROOM,
+                async ({ chatId, count, ids = [] }) => {
+                    if (chatId && selectedChatId.value === chatId) {
                         clientsCount.value = count
                         allUsersOnline.value = ids
                     }
@@ -244,6 +253,7 @@ export default {
             isProgressStatusUserInfo,
             currentChatInfo,
             clientsCount,
+            isButtonLoading,
         }
     },
     components: {

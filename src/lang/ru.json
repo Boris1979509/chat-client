@@ -23,6 +23,8 @@
     "Max": "Поле \"{name}\" должно быть не более {max} символов.",
     "User join chat": "Пользователь \"{username}\" сейчас в чате.",
     "User leave chat": "Пользователь \"{username}\" покинул чат.",
+    "User online": "Пользователь \"{username}\" сейчас в сети.",
+    "User offline": "Пользователь \"{username}\" не в сети.",
     "Loading": "Ждите...",
     "General data" : "Общие настройки",
     "Successful login message": "Вы вошли в систему.",

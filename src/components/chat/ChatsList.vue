@@ -40,7 +40,7 @@
     <h2 class="p-2 text-gray-600 text-lg">
         {{ $t('Public chats') }}
     </h2>
-    <template v-if="chatsList?.length">
+    <template v-if="chatsList && currentUser">
         <div class="overflow-auto h-screen truncate">
             <chat-item
                 v-for="chat in chatsList"
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, inject, watch } from 'vue'
+import { ref, onMounted, computed, inject } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router'
 import store from '@/store'
@@ -72,9 +72,11 @@ export default {
     setup() {
         const route = useRoute()
         const socket = inject('socket')
-        const chatsList = computed(() => store.getters['chat/publicChat'])
+        const chatsList = computed(
+            () => store.getters['chat/publicChat'] ?? null
+        )
         /** Current user */
-        const currentUser = computed(() => store.getters['user/user'])
+        const currentUser = computed(() => store.getters['user/user'] ?? null)
         const chatIdsPool = ref([])
 
         /** Not use */
@@ -87,8 +89,12 @@ export default {
         )
         /** Get chat */
         const getChat = async (chatId) => {
+            console.log(chatId)
             await store.dispatch('chat/selectChat', chatId)
-            socket.emit(emitters.CLIENTS_COUNT_ONLINE_IN_ROOM, chatId)
+            socket.emit(emitters.FETCH_COUNT_SOCKETS_IN_ROOM, {
+                chatId,
+                state: false,
+            })
         }
         const setChatId = async () => {
             const chatId = route.query.chatId
@@ -116,20 +122,9 @@ export default {
                 chatIdsPool.value.splice(idx, 1)
             }
         }
-        const connectChats = (chats) => {
-            chats.forEach((chat) => {
-                socket.emit(emitters.SELECT_CHAT, chat._id)
-            })
-        }
-        watch(
-            () => chatsList.value,
-            (value) => {
-                if (value) connectChats(value)
-            }
-        )
         onMounted(async () => {
             await getPublicChats()
-            setChatId()
+            await setChatId()
             socket.on(listeners.NEW_MESSAGE, (data) => {
                 if (data.chat === selectedChatId.value) return
                 if (!isExistChatIdInPool(data.chat))

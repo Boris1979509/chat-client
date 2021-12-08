@@ -23,6 +23,8 @@
     "Max": "The \"{name}\" must be no more than {max}.",
     "User join chat": "User \"{username}\" in the chat.",
     "User leave chat": "User \"{username}\" left the chat.",
+    "User online": "User \"{username}\" online.",
+    "User offline": "User \"{username}\" offline.",
     "Loading": "Loading...",
     "Logout": "Logout",
     "Public chats": "Public chats",

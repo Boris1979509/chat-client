@@ -3,7 +3,7 @@
         class="
             relative
             flex-1
-            p-2
+            px-2
             justify-between
             flex flex-col
             h-screen

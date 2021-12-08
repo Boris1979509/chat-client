@@ -6,9 +6,10 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { inject, watch, computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import emitters from '@/plugins/socket/emitters'
+import listeners from '@/plugins/socket/listeners'
 import CurrentChat from '@/components/chat/CurrentChat.vue'
 import Aside from '@/components/chat/Aside.vue'
 export default {
@@ -16,16 +17,20 @@ export default {
     setup() {
         const socket = inject('socket')
         const store = useStore()
+        const user = computed(() => store.getters['user/user'])
 
-        const setUserOnline = (user) => {
-            socket.emit(emitters.SET_USER_ONLINE, user)
-        }
-        store.watch(
-            (state, getters) => getters['user/user'],
-            (value) => {
-                if (value) setUserOnline(value)
+        const isWatchOnce = ref(true)
+
+        const setUser = () => {
+            if (user.value?.chats && user.value.chats.length) {
+                socket.emit(emitters.SET_USER_ONLINE, user.value)
+                console.log('User with chats!')
             }
-        )
+            isWatchOnce.value = false
+        }
+        watch(user, (value) => {
+            if (value && isWatchOnce.value) setUser()
+        })
     },
     components: {
         CurrentChat,

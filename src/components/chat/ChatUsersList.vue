@@ -22,19 +22,9 @@ export default {
     setup() {
         const allUsersOnline = inject('all-users-online')
 
-        /** io.sockets.emit */
-        const userStatus = inject('user-status')
-
         /** is user online */
         const isOnline = (userId) => {
-            console.log(userId, userStatus)
-            if (userStatus.userId === userId && userStatus.online) {
-                return true
-            } else if (userStatus.userId === userId && !userStatus.online) {
-                return false
-            } else {
-                return allUsersOnline.value.some((item) => item === userId)
-            }
+            return allUsersOnline.value.some((item) => item === userId)
         }
         return { isOnline }
     },
