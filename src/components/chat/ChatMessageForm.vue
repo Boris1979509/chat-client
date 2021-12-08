@@ -1,9 +1,13 @@
 <template>
     <template v-if="!isJoin">
         <div class="flex justify-center p-2">
-            <app-button @click="joinChat" color="success" type="button">{{
-                $t('Join chat')
-            }}</app-button>
+            <app-button
+                :isButtonLoading="isButtonLoading"
+                @click="joinChat"
+                color="success"
+                type="button"
+                >{{ $t('Join chat') }}</app-button
+            >
         </div>
     </template>
     <div v-else class="w-full p-3 border-t border-gray-300">
@@ -49,6 +53,10 @@ export default {
             type: Boolean,
             required: true,
         },
+        isButtonLoading: {
+            type: Boolean,
+            required: true,
+        },
     },
     setup(_, { emit }) {
         const message = ref('')
@@ -57,15 +65,13 @@ export default {
             emit('send-message', message.value)
             message.value = ''
         }
+        /** Joined chat room */
         const joinChat = () => {
             emit('join-chat')
         }
-        watch(
-            () => message.value,
-            () => {
-                emit('typing-message')
-            }
-        )
+        watch(message, () => {
+            emit('typing-message')
+        })
         return { joinChat, message, sendMessage }
     },
 }
