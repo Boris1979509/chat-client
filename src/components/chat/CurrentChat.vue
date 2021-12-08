@@ -14,6 +14,8 @@
                 v-if="selectedChatId && currentChatInfo"
                 :current-chat-info="currentChatInfo"
                 :clients-count="clientsCount"
+                :is-typing="isTyping"
+                :user-typing-name="userTypingName"
             />
             <template v-if="currentUser">
                 <app-dropdown icon="dots-vertical">
@@ -30,7 +32,6 @@
                 :is-progress-status-messages="isProgressStatusMessages"
                 :messages="currentChatMessages"
                 :current-user-id="currentUser._id"
-                :is-typing="isTyping"
             />
             <chat-message-form
                 @typingMessage="onTypingMessage"
@@ -70,6 +71,7 @@ export default {
         /*--------------------------------*/
 
         const isTyping = ref(false)
+        const userTypingName = ref('')
         let typingTimeout = false
 
         const isProgressStatusUserInfo = computed(
@@ -128,11 +130,16 @@ export default {
             isTyping.value = true
             typingTimeout = setTimeout(() => (isTyping.value = false), 1000)
         }
+        /** Run typing  */
         const onTypingMessage = () => {
-            socket.emit(emitters.USER_TYPING, {
-                chatId: selectedChatId.value,
-                userId: currentUser.value._id,
-            })
+            socket.emit(
+                emitters.USER_TYPING,
+                m(
+                    selectedChatId.value,
+                    currentUser.value.username,
+                    currentUser.value._id
+                )
+            )
         }
         const onSendMessage = (text) => {
             socket.emit(emitters.NEW_MESSAGE, {
@@ -193,12 +200,14 @@ export default {
                 userChatNotify('Left chat')
             })
             /** User typing */
-            socket.on(listeners.USER_TYPING, ({ chatId, userId }) => {
+            socket.on(listeners.USER_TYPING, ({ chatId, userId, username }) => {
                 if (
                     userId !== currentUser.value._id &&
                     chatId === selectedChatId.value
-                )
+                ) {
+                    userTypingName.value = username
                     setTyping()
+                }
             })
             socket.on(listeners.NEW_MESSAGE, async (message) => {
                 if (message.chat === selectedChatId.value) {
@@ -254,6 +263,7 @@ export default {
             currentChatInfo,
             clientsCount,
             isButtonLoading,
+            userTypingName,
         }
     },
     components: {

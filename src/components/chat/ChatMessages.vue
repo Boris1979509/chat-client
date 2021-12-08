@@ -36,7 +36,6 @@
                     "
                 />
                 <empty-chat-messages v-else />
-                <app-typing v-if="isTyping" />
             </div>
         </template>
     </div>
@@ -56,10 +55,6 @@ export default {
         currentUserId: {
             type: String,
             required: true,
-        },
-        isTyping: {
-            type: Boolean,
-            default: false,
         },
         isProgressStatusMessages: {
             type: Boolean,

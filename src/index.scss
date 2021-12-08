@@ -174,4 +174,18 @@ label.is-invalid {
 .alert-info {
   @apply bg-blue-200 text-blue-800;
 }
+/** Typing loader */
+.first-circle, .second-circle, .last-circle{
+  width: 5px;
+  height: 5px;
+}
+.first-circle{
+  animation-delay: 0.1s;
+}
+.second-circle{
+  animation-delay: 0.2s;
+}
+.last-circle{
+  animation-delay: 0.3s;
+}
 
