@@ -49,5 +49,9 @@
     "Information about chat group": "Information about chat group",
     "online": "online",
     "typing": "typing",
-    "Write Something": "Write Something ..."
+    "Write Something": "Write Something ...",
+    "NotFound": "Page not found.",
+    "Home": "Home",
+    "Settings": "Settings",
+    "404 - Page not found": "404 - Page not found"
 }
