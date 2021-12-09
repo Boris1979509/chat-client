@@ -1,1 +1,1 @@
-# Chat app frontend part
+# The client part of the application
