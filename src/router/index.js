@@ -1,4 +1,3 @@
-import { nextTick } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -24,7 +23,7 @@ const routes = [
         name: 'forgot',
         meta: {
             layout: 'auth',
-            title: 'Forgot password',
+            title: 'Reset password',
         },
         component: () => import('@/views/Forgot.vue'),
     },
@@ -33,7 +32,7 @@ const routes = [
         name: 'signup',
         meta: {
             layout: 'auth',
-            title: 'Sign up',
+            title: 'Signup',
         },
         component: () => import('@/views/SignUp.vue'),
     },
@@ -42,9 +41,17 @@ const routes = [
         name: 'firstLoginSettings',
         meta: {
             layout: 'auth',
-            title: 'First login',
+            title: 'Settings',
         },
         component: () => import('@/views/FirstLoginSettings.vue'),
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'notFound',
+        component: () => import('@/views/NotFound.vue'),
+        meta: {
+            title: '404 - Page not found',
+        },
     },
 ]
 
@@ -53,10 +60,10 @@ const router = createRouter({
     routes,
 })
 
-router.afterEach(async (to) => {
-    await nextTick(() => {
-        document.title = to.meta.title ?? import.meta.env.VITE_APP_NAME
-    })
-})
+// router.afterEach(async (to) => {
+//     await nextTick(() => {
+//         document.title = to.meta.title ?? import.meta.env.VITE_APP_NAME
+//     })
+// })
 
 export default router

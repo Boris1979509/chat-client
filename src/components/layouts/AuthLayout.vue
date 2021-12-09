@@ -21,10 +21,14 @@
 
 <script>
 import AppImage from '@/components/ui/AppImage.vue'
+import { useSetTitle } from '@/use/setTitle'
 export default {
     name: 'AuthLayout',
     components: {
         AppImage,
+    },
+    setup() {
+        useSetTitle()
     },
 }
 </script>

@@ -6,15 +6,16 @@
 </template>
 
 <script>
-import { inject, watch, computed, onMounted, ref } from 'vue'
+import { inject, watch, computed, ref } from 'vue'
 import { useStore } from 'vuex'
+import { useSetTitle } from '@/use/setTitle'
 import emitters from '@/plugins/socket/emitters'
-import listeners from '@/plugins/socket/listeners'
 import CurrentChat from '@/components/chat/CurrentChat.vue'
 import Aside from '@/components/chat/Aside.vue'
 export default {
     name: 'Home',
     setup() {
+        useSetTitle()
         const socket = inject('socket')
         const store = useStore()
         const user = computed(() => store.getters['user/user'])
