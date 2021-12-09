@@ -12,7 +12,11 @@
     </template>
     <div v-else class="w-full p-3 border-t border-gray-300">
         <div class="flex gap-3">
-            <app-textarea v-model.trim="message" class="flex-grow-2" />
+            <app-textarea
+                v-model.trim="message"
+                :isFocus="isFocus"
+                class="flex-grow-2"
+            />
             <div class="flex-grow-1">
                 <button
                     @click="sendMessage"
@@ -59,20 +63,26 @@ export default {
         },
     },
     setup(_, { emit }) {
+        const isFocus = ref(false)
         const message = ref('')
+
         /** Send message */
         const sendMessage = () => {
             emit('send-message', message.value)
             message.value = ''
+            isFocus.value = true
         }
+
         /** Joined chat room */
         const joinChat = () => {
             emit('join-chat')
+            isFocus.value = true
         }
+
         watch(message, () => {
             emit('typing-message')
         })
-        return { joinChat, message, sendMessage }
+        return { joinChat, message, sendMessage, isFocus }
     },
 }
 </script>

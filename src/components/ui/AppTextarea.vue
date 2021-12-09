@@ -10,24 +10,42 @@
             p-3
             resize-none
         "
+        ref="root"
         :value="modelValue"
         @input="change"
-        placeholder="Write Something"
+        :placeholder="$t('Write Something')"
     ></textarea>
 </template>
 
 <script>
+import { onMounted, ref, onUpdated } from 'vue'
 export default {
     name: 'AppTextarea',
     emits: ['update:modelValue'],
     props: {
         modelValue: String,
+        isFocus: {
+            type: Boolean,
+            default: false,
+        },
     },
-    setup(_, { emit }) {
+    setup(props, { emit }) {
+        const root = ref(null)
         const change = (event) => {
             emit('update:modelValue', event.target.value)
         }
-        return { change }
+
+        const setFocus = () => {
+            if (props.isFocus) root.value.focus()
+        }
+
+        onMounted(() => {
+            setFocus()
+        })
+        onUpdated(() => {
+            setFocus()
+        })
+        return { change, root }
     },
 }
 </script>
