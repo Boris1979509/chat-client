@@ -12,7 +12,11 @@
 </template>
 
 <script>
+import { useSetTitle } from '@/use/setTitle'
 export default {
     name: 'NotFound',
+    setup() {
+        useSetTitle()
+    },
 }
 </script>
