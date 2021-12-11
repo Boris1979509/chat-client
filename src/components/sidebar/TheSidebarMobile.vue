@@ -21,19 +21,7 @@
             <div class="flex h-16 p-3 items-center border-b border-gray-200">
                 <app-hamburger />
             </div>
-
-            <div
-                class="
-                    overflow-y-auto
-                    scrollbar-thumb-blue
-                    scrollbar-thumb-rounded
-                    scrollbar-track-blue-lighter
-                    scrollbar-w-2
-                    scrolling-touch
-                "
-            >
-                <chats-list @close="close" />
-            </div>
+            <chats-list @close="close" />
         </div>
     </transition>
 </template>
