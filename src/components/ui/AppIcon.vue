@@ -10,11 +10,13 @@ import {
     InformationCircleIcon,
     XIcon,
     CogIcon,
+    ArrowLeftIcon,
 } from '@heroicons/vue/outline'
 import {
     PaperAirplaneIcon,
     UserGroupIcon,
     DotsVerticalIcon,
+    MenuIcon,
 } from '@heroicons/vue/solid'
 
 export default {
@@ -35,6 +37,8 @@ export default {
         CogIcon,
         UserGroupIcon,
         DotsVerticalIcon,
+        MenuIcon,
+        ArrowLeftIcon,
     },
 }
 </script>

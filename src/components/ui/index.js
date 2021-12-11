@@ -12,6 +12,7 @@ import AppBadge from '@/components/ui/AppBadge.vue'
 import AppDropdown from '@/components/ui/AppDropdown.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import AppTypingLoader from '@/components/ui/AppTypingLoader.vue'
+import AppHamburger from '@/components/ui/AppHamburger.vue'
 export default [
     AppIcon,
     AppInput,
@@ -27,4 +28,5 @@ export default [
     AppDropdown,
     AppModal,
     AppTypingLoader,
+    AppHamburger,
 ]
