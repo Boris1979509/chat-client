@@ -10,7 +10,11 @@
             >
         </div>
     </template>
-    <div v-else class="w-full p-3 border-t border-gray-300">
+    <div
+        v-else
+        :class="[isSidebarOpen ? 'left-64' : 'left-0']"
+        class="fixed bottom-0 bg-white right-0 p-3 border-t border-gray-300"
+    >
         <div class="flex gap-3">
             <app-textarea
                 v-model.trim="message"
@@ -60,6 +64,9 @@ export default {
         isButtonLoading: {
             type: Boolean,
             required: true,
+        },
+        isSidebarOpen: {
+            type: Boolean,
         },
     },
     setup(_, { emit }) {

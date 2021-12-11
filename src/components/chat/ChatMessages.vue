@@ -1,14 +1,6 @@
 <template>
     <div
-        class="
-            relative
-            flex-1
-            px-2
-            justify-between
-            flex flex-col
-            h-screen
-            bg-white
-        "
+        class="relative flex-1 justify-between flex flex-col h-screen bg-white"
     >
         <app-loader v-if="isProgressStatusMessages" />
         <template v-else>

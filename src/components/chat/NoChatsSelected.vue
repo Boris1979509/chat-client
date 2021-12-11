@@ -1,6 +1,8 @@
 <template>
-    <div class="p-4">
-        <app-alert type="info">{{ $t('No chats selected') }}</app-alert>
+    <div class="h-screen flex items-center justify-center">
+        <div class="container">
+            <app-alert type="info">{{ $t('No chats selected') }}</app-alert>
+        </div>
     </div>
 </template>
 
