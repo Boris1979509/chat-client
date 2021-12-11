@@ -10,37 +10,12 @@
             hover:bg-gray-100
         "
     >
-        <div
-            class="
-                flex
-                items-center
-                justify-center
-                bg-red-600
-                h-12
-                w-12
-                rounded-full
-                relative
-            "
-        >
-            <span
-                class="font-bold text-white"
-                v-text="$filters.firstChar(user.username)"
-            ></span>
-            <transition name="fade">
-                <div
-                    v-if="isOnline"
-                    class="
-                        w-3
-                        h-3
-                        border-2 border-white
-                        bottom-0
-                        right-0
-                        absolute
-                        rounded-lg
-                        bg-green-400
-                    "
-                ></div>
-            </transition>
+        <div class="relative">
+            <app-avatar
+                :name="user.username"
+                :classes="['h-10', 'w-10']"
+                :is-online="isOnline"
+            />
         </div>
         <div class="flex-grow">
             <div class="flex items-center gap-1">

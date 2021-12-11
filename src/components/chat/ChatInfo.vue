@@ -1,21 +1,6 @@
 <template>
     <div class="flex items-center gap-3 px-6 py-3">
-        <div
-            class="
-                flex
-                items-center
-                justify-center
-                bg-indigo-600
-                h-12
-                w-12
-                rounded-full
-            "
-        >
-            <span
-                class="font-bold text-white"
-                v-text="$filters.firstChar(chatName)"
-            ></span>
-        </div>
+        <app-avatar :name="chatName" />
         <div class="flex-grow">
             <div class="flex items-center gap-1">
                 <app-icon icon="user-group" class="w-4 h-4 text-gray-600" />

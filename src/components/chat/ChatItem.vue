@@ -16,27 +16,11 @@
             ease-in-out
         "
     >
-        <div>
-            <span
+        <app-avatar :name="chatName" />
+        <!-- <span
                 v-if="isNewMessageInCurrentChat"
                 class="absolute bg-red-500 right-0 top-0 w-2 h-2 rounded-full"
-            ></span>
-            <div
-                class="
-                    flex
-                    items-center
-                    justify-center
-                    bg-indigo-600
-                    h-10
-                    w-10
-                    rounded-full
-                    text-white
-                    font-bold
-                "
-            >
-                <span v-text="$filters.firstChar(chatName)"></span>
-            </div>
-        </div>
+            ></span> -->
         <div class="ml-2 w-full truncate">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-1">
