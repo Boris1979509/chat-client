@@ -1,6 +1,6 @@
 <template>
     <template v-if="chatsList && currentUser">
-        <div class="overflow-auto h-screen truncate">
+        <div class="overflow-y-auto h-screen truncate">
             <chat-item
                 v-for="chat in chatsList"
                 :key="chatsList._id"
