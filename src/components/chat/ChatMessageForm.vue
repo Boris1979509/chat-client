@@ -13,7 +13,7 @@
     <div
         v-else
         :class="[isSidebarOpen ? 'left-64' : 'left-0']"
-        class="fixed bottom-0 bg-white right-0 p-3 border-t border-gray-300"
+        class="fixed bottom-0 bg-white right-0 p-3 border-t border-gray-200"
     >
         <div class="flex gap-3">
             <app-textarea
@@ -36,7 +36,7 @@
                         duration-500
                         ease-in-out
                         text-white
-                        bg-blue-500
+                        bg-blue-600
                         hover:bg-blue-400
                         focus:outline-none
                     "

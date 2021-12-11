@@ -11,7 +11,7 @@
                 flex
                 items-center
                 justify-between
-                border-b border-gray-300
+                border-b border-gray-200
                 p-3
                 h-16
             "

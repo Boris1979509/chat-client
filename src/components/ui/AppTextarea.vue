@@ -1,5 +1,6 @@
 <template>
     <textarea
+        rows="1"
         class="
             w-full
             focus:outline-none focus:placeholder-gray-400

@@ -8,8 +8,9 @@
                 v-scroll-down="messages.length"
                 class="
                     flex flex-col
-                    space-y-4
-                    p-3
+                    space-y-2
+                    py-20
+                    px-3
                     overflow-y-auto
                     scrollbar-thumb-blue
                     scrollbar-thumb-rounded

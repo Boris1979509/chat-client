@@ -2,17 +2,15 @@
     <a
         href="#"
         @click.prevent="selectChat"
-        :class="[selectedChat ? 'border-gray-300 bg-gray-100' : '']"
+        :class="[selectedChat ? 'bg-gray-100' : 'hover:bg-gray-50']"
         class="
-            hover:bg-gray-100
-            border-b border-gray-300
             px-3
             py-2
             cursor-pointer
             flex
             items-center
             text-sm
-            focus:outline-none focus:border-gray-300
+            focus:outline-none
             transition
             duration-200
             ease-in-out

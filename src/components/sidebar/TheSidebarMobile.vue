@@ -18,7 +18,7 @@
         leave-to-class="-translate-x-full"
     >
         <div v-show="isActive" class="fixed w-64 bg-white h-full z-30">
-            <div class="flex h-16 p-3 items-center border-b border-gray-300">
+            <div class="flex h-16 p-3 items-center border-b border-gray-200">
                 <app-hamburger />
             </div>
 

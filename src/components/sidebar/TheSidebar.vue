@@ -17,10 +17,10 @@
                 w-64
                 bg-white
                 h-full
-                border-r border-gray-300
+                border-r border-gray-200
             "
         >
-            <div class="flex h-16 p-3 items-center border-b border-gray-300">
+            <div class="flex h-16 p-3 items-center border-b border-gray-200">
                 <app-hamburger />
             </div>
             <div

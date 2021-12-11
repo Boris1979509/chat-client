@@ -10,7 +10,7 @@
                         ? 'order-1 items-end'
                         : 'order-2 items-start',
                 ]"
-                class="flex flex-col space-y-2 text-sm max-w-xs mx-2"
+                class="flex flex-col space-y-2 text-sm max-w-xs"
             >
                 <div>
                     <div
@@ -18,7 +18,7 @@
                         :class="[
                             isCurrentUserMessage
                                 ? 'rounded-br-none bg-blue-600 text-white'
-                                : 'bg-gray-300 text-gray-600 rounded-bl-none',
+                                : 'bg-gray-200 text-gray-600 rounded-bl-none',
                         ]"
                     >
                         <template v-if="username">
@@ -35,7 +35,7 @@
                 v-if="!isCurrentUserMessage"
                 src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
                 alt="My profile"
-                class="w-6 h-6 rounded-full order-1"
+                class="w-6 h-6 rounded-full order-1 mr-2"
             />
         </div>
     </div>
