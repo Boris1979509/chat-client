@@ -13,6 +13,7 @@ import AppDropdown from '@/components/ui/AppDropdown.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import AppTypingLoader from '@/components/ui/AppTypingLoader.vue'
 import AppHamburger from '@/components/ui/AppHamburger.vue'
+import AppAvatar from '@/components/ui/AppAvatar.vue'
 export default [
     AppIcon,
     AppInput,
@@ -29,4 +30,5 @@ export default [
     AppModal,
     AppTypingLoader,
     AppHamburger,
+    AppAvatar,
 ]
