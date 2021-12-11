@@ -40,13 +40,14 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import ChatInfo from '@/components/chat/ChatInfo.vue'
 import ChatTyping from '@/components/chat/ChatTyping.vue'
 
 export default {
     components: { ChatInfo, ChatTyping },
     name: 'SelectedChatInfo',
+    emits: ['change-state-dropdown-item'],
     props: {
         currentChatInfo: {
             type: Object,
@@ -63,8 +64,11 @@ export default {
         userTypingName: {
             type: String,
         },
+        showInfoChatGroupFromDropdown: {
+            type: Boolean,
+        },
     },
-    setup(props) {
+    setup(props, { emit }) {
         const modal = ref(false)
         const chatName = computed(() => props.currentChatInfo.name)
         const countUsersChat = computed(
@@ -73,6 +77,19 @@ export default {
         const showModalInfo = () => {
             modal.value = true
         }
+
+        /** change state dropdown item on false */
+        const changeStateDropdownItem = (value) => {
+            modal.value = value
+            emit('change-state-dropdown-item', !value)
+        }
+
+        watch(
+            () => props.showInfoChatGroupFromDropdown,
+            (value) => {
+                if (value) changeStateDropdownItem(value)
+            }
+        )
         return { chatName, countUsersChat, modal, showModalInfo }
     },
 }

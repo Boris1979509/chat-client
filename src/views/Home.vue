@@ -1,7 +1,16 @@
 <template>
-    <div class="h-screen grid grid-cols-3 min-w-full min-h-full">
-        <Aside class="col-span-1" />
-        <current-chat class="col-span-2" />
+    <div class="h-screen min-w-full min-h-full">
+        <the-sidebar :is-active="isSidebarOpen" />
+        <the-sidebar-mobile
+            :is-active="isMobileSidebarOpen"
+            @close="closeMobileSidebar"
+        />
+        <div :class="[isSidebarOpen ? 'ml-64' : 'ml-0']">
+            <current-chat
+                @toggle-sidebar="toggleSidebar"
+                :is-sidebar-open="isSidebarOpen"
+            />
+        </div>
     </div>
 </template>
 
@@ -11,7 +20,9 @@ import { useStore } from 'vuex'
 import { useSetTitle } from '@/use/setTitle'
 import emitters from '@/plugins/socket/emitters'
 import CurrentChat from '@/components/chat/CurrentChat.vue'
-import Aside from '@/components/chat/Aside.vue'
+import TheSidebar from '@/components/sidebar/TheSidebar.vue'
+import TheSidebarMobile from '@/components/sidebar/TheSidebarMobile.vue'
+import { useSidebar } from '@/use/sidebar'
 export default {
     name: 'Home',
     setup() {
@@ -25,17 +36,18 @@ export default {
         const setUser = () => {
             if (user.value?.chats && user.value.chats.length) {
                 socket.emit(emitters.SET_USER_ONLINE, user.value)
-                console.log('User with chats!')
             }
             isWatchOnce.value = false
         }
         watch(user, (value) => {
             if (value && isWatchOnce.value) setUser()
         })
+        return { ...useSidebar() }
     },
     components: {
         CurrentChat,
-        Aside,
+        TheSidebar,
+        TheSidebarMobile,
     },
 }
 </script>

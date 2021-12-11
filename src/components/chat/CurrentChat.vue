@@ -1,7 +1,13 @@
 <template>
     <main>
         <div
+            :class="[isSidebarOpen ? 'left-64' : 'left-0']"
             class="
+                fixed
+                inset-y-0
+                bg-white
+                right-0
+                z-10
                 flex
                 items-center
                 justify-between
@@ -10,18 +16,30 @@
                 h-16
             "
         >
+            <app-icon
+                v-if="!isSidebarOpen"
+                icon="arrow-left"
+                class="w-5 h-5 text-gray-600 mr-3 cursor-pointer"
+                @click="openMobileSidebar"
+            />
             <selected-chat-info
                 v-if="selectedChatId && currentChatInfo"
                 :current-chat-info="currentChatInfo"
                 :clients-count="clientsCount"
                 :is-typing="isTyping"
                 :user-typing-name="userTypingName"
+                :show-info-chat-group-from-dropdown="stateDropdownItem"
+                @changeStateDropdownItem="changeStateDropdownItem"
             />
             <template v-if="currentUser">
                 <app-dropdown icon="dots-vertical">
                     <chat-dropdown-actions
                         :is-join="isUserJoin"
                         @leaveChat="onLeaveChat"
+                        @showInfoChatGroupFromDropdown="
+                            showInfoChatGroupFromDropdown
+                        "
+                        :selectedChatId="selectedChatId"
                     />
                 </app-dropdown>
             </template>
@@ -39,6 +57,7 @@
                 @joinChat="onJoinChat"
                 :is-join="isUserJoin"
                 :isButtonLoading="isButtonLoading"
+                :is-sidebar-open="isSidebarOpen"
             />
         </template>
     </main>
@@ -58,12 +77,27 @@ import ChatDropdownActions from '@/components/chat/ChatDropdownActions.vue'
 
 export default {
     name: 'CurrentChat',
-    setup() {
+    emits: ['toggle-sidebar'],
+    props: {
+        isSidebarOpen: Boolean,
+    },
+    setup(_, { emit }) {
         const { t } = useI18n() // translate
         const socket = inject('socket')
 
         const clientsCount = ref(0)
         const isButtonLoading = ref(false)
+
+        /** Call modal from dropdown menu item */
+        const stateDropdownItem = ref(false)
+
+        const showInfoChatGroupFromDropdown = (value) => {
+            stateDropdownItem.value = value
+        }
+        const changeStateDropdownItem = (value) => {
+            stateDropdownItem.value = value
+        }
+        /** end */
 
         /** ONLINE || OFFLINE */
         const allUsersOnline = ref([])
@@ -247,7 +281,10 @@ export default {
                 }
             )
         })
-
+        /** Mobile sidebar */
+        const openMobileSidebar = () => {
+            emit('toggle-sidebar')
+        }
         return {
             selectedChatId,
             currentChatMessages,
@@ -264,6 +301,10 @@ export default {
             clientsCount,
             isButtonLoading,
             userTypingName,
+            openMobileSidebar,
+            showInfoChatGroupFromDropdown,
+            stateDropdownItem,
+            changeStateDropdownItem,
         }
     },
     components: {

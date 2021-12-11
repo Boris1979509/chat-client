@@ -1,5 +1,22 @@
 <template>
     <ul class="list-none overflow-hidden py-2">
+        <li v-if="selectedChatId">
+            <a
+                href="#"
+                class="
+                    transition
+                    duration-200
+                    block
+                    px-3
+                    py-1
+                    hover:bg-gray-100
+                "
+                @click.prevent="
+                    $emit('show-info-chat-group-from-dropdown', true)
+                "
+                v-text="$t('Information about chat group')"
+            ></a>
+        </li>
         <li v-if="isJoin">
             <a
                 href="#"
@@ -40,11 +57,14 @@ import { useI18n } from 'vue-i18n'
 
 export default {
     name: 'ChatDropdownActions',
-    emits: ['leave-chat'],
+    emits: ['leave-chat', 'show-info-chat-group-from-dropdown'],
     props: {
         isJoin: {
             type: Boolean,
             required: true,
+        },
+        selectedChatId: {
+            type: String,
         },
     },
     setup() {

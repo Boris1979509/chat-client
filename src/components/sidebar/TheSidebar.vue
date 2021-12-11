@@ -1,0 +1,52 @@
+<template>
+    <transition
+        enter-active-class="transition ease-in-out duration-200 transform"
+        enter-from-class="-translate-x-full"
+        enter-to-class="translate-x-0"
+        leave-active-class="transition ease-in-out duration-200 transform"
+        leave-from-class="translate-x-0"
+        leave-to-class="-translate-x-full"
+    >
+        <div
+            v-show="isActive"
+            class="
+                fixed
+                xl:block
+                top-0
+                left-0
+                w-64
+                bg-white
+                h-full
+                border-r border-gray-300
+            "
+        >
+            <div class="flex h-16 p-3 items-center border-b border-gray-300">
+                <app-hamburger />
+            </div>
+            <div
+                class="
+                    overflow-y-auto
+                    scrollbar-thumb-blue
+                    scrollbar-thumb-rounded
+                    scrollbar-track-blue-lighter
+                    scrollbar-w-2
+                    scrolling-touch
+                "
+            >
+                <chats-list />
+            </div>
+        </div>
+    </transition>
+</template>
+
+<script>
+import ChatsList from '@/components/chat/ChatsList.vue'
+
+export default {
+    name: 'TheSidebar',
+    props: {
+        isActive: Boolean,
+    },
+    components: { ChatsList },
+}
+</script>
