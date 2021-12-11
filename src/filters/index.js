@@ -1,4 +1,11 @@
-import { isToday, differenceInDays, format } from 'date-fns'
+import {
+    isToday,
+    differenceInDays,
+    format,
+    formatDistance,
+    subDays,
+} from 'date-fns'
+import { ru } from 'date-fns/locale'
 export default {
     passedTime(value) {
         if (!Number.isInteger(value)) {
@@ -6,13 +13,17 @@ export default {
         }
         const date = new Date(value)
         const today = new Date()
-        const diff = differenceInDays(today, date)
+        const diff = differenceInDays(new Date(), date)
 
         let result = ''
         if (isToday(date)) {
             result = format(date, 'HH:mm')
         } else {
-            result = `${diff} days ago.`
+            //result = `${diff} days ago.`
+            result = formatDistance(subDays(today, diff), today, {
+                addSuffix: true,
+                locale: ru,
+            })
         }
         return result
     },
