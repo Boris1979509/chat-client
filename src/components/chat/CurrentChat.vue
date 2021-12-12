@@ -80,8 +80,12 @@ export default {
     emits: ['toggle-sidebar'],
     props: {
         isSidebarOpen: Boolean,
+        currentUser: {
+            type: Object,
+            required: true,
+        },
     },
-    setup(_, { emit }) {
+    setup(props, { emit }) {
         const { t } = useI18n() // translate
         const socket = inject('socket')
 
@@ -126,10 +130,9 @@ export default {
         const currentChatInfo = computed(
             () => store.getters['chat/currentChat']
         )
-        const currentUser = computed(() => store.getters['user/user'])
         /** Is user in chat  */
         const isUserJoin = computed(() =>
-            currentUser.value?.chats.includes(selectedChatId.value)
+            props.currentUser?.chats.includes(selectedChatId.value)
         )
         /**  */
         const m = (chatId, username, userId) => ({ chatId, username, userId })
@@ -141,8 +144,8 @@ export default {
                 emitters.JOIN_CHAT,
                 m(
                     selectedChatId.value,
-                    currentUser.value.username,
-                    currentUser.value._id
+                    props.currentUser.username,
+                    props.currentUser._id
                 )
             )
         }
@@ -152,8 +155,8 @@ export default {
                 emitters.LEAVE_CHAT,
                 m(
                     selectedChatId.value,
-                    currentUser.value.username,
-                    currentUser.value._id
+                    props.currentUser.username,
+                    props.currentUser._id
                 )
             )
         }
@@ -170,15 +173,15 @@ export default {
                 emitters.USER_TYPING,
                 m(
                     selectedChatId.value,
-                    currentUser.value.username,
-                    currentUser.value._id
+                    props.currentUser.username,
+                    props.currentUser._id
                 )
             )
         }
         const onSendMessage = (text) => {
             socket.emit(emitters.NEW_MESSAGE, {
                 chatId: selectedChatId.value,
-                userId: currentUser.value._id,
+                userId: props.currentUser._id,
                 text,
             })
         }
@@ -199,15 +202,15 @@ export default {
                 listeners.NEW_USER_JOIN,
                 async ({ username, userId, chatId }) => {
                     if (
-                        userId !== currentUser.value._id &&
+                        userId !== props.currentUser._id &&
                         isUserJoin.value &&
                         selectedChatId.value === chatId
                     ) {
                         userChatNotify('User join chat', username)
-                    } else if (userId === currentUser.value._id) {
+                    } else if (userId === props.currentUser._id) {
                         await store.dispatch(
                             'user/getUser',
-                            currentUser.value.email
+                            props.currentUser.email
                         )
                         /** Message for current user in room */
                         userChatNotify('Joined chat')
@@ -230,13 +233,13 @@ export default {
             )
             /** REFRESH CURRENT USER AFTER LEAVE CHAT */
             socket.on(listeners.USER_REFRESH_AFTER_LEAVE_CHAT, async () => {
-                await store.dispatch('user/getUser', currentUser.value.email)
+                await store.dispatch('user/getUser', props.currentUser.email)
                 userChatNotify('Left chat')
             })
             /** User typing */
             socket.on(listeners.USER_TYPING, ({ chatId, userId, username }) => {
                 if (
-                    userId !== currentUser.value._id &&
+                    userId !== props.currentUser._id &&
                     chatId === selectedChatId.value
                 ) {
                     userTypingName.value = username
@@ -252,7 +255,7 @@ export default {
 
             /** ONLINE */
             socket.on(listeners.USER_ONLINE, ({ userId, username }) => {
-                if (userId !== currentUser.value._id) {
+                if (userId !== props.currentUser._id) {
                     userChatNotify('User online', username)
                 }
                 socket.emit(emitters.FETCH_COUNT_SOCKETS_IN_ROOM, {
@@ -262,7 +265,7 @@ export default {
             })
             /** OFFLINE */
             socket.on(listeners.USER_OFFLINE, async ({ userId, username }) => {
-                if (userId !== currentUser.value._id) {
+                if (userId !== props.currentUser._id) {
                     userChatNotify('User offline', username)
                 }
                 socket.emit(emitters.FETCH_COUNT_SOCKETS_IN_ROOM, {
@@ -288,7 +291,6 @@ export default {
         return {
             selectedChatId,
             currentChatMessages,
-            currentUser,
             isUserJoin,
             onJoinChat,
             onLeaveChat,
