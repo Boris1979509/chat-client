@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { useUserIsOnline } from '@/use/userIsOnline'
 import ChatUserItem from '@/components/chat/ChatUserItem.vue'
 export default {
     components: { ChatUserItem },
@@ -20,13 +20,7 @@ export default {
         },
     },
     setup() {
-        const allUsersOnline = inject('all-users-online')
-
-        /** is user online */
-        const isOnline = (userId) => {
-            return allUsersOnline.value.some((item) => item === userId)
-        }
-        return { isOnline }
+        return { ...useUserIsOnline() }
     },
 }
 </script>

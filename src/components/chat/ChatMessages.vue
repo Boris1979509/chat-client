@@ -6,18 +6,7 @@
         <template v-else>
             <div
                 v-scroll-down="messages.length"
-                class="
-                    flex flex-col
-                    space-y-2
-                    py-20
-                    px-3
-                    overflow-y-auto
-                    scrollbar-thumb-blue
-                    scrollbar-thumb-rounded
-                    scrollbar-track-blue-lighter
-                    scrollbar-w-2
-                    scrolling-touch
-                "
+                class="flex flex-col space-y-2 pt-20 pb-4 px-3 overflow-y-auto"
             >
                 <chat-message-item
                     v-if="messages.length"

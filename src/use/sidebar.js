@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 export const useSidebar = () => {
     const isMobileSidebarOpen = ref(false)
     const isSidebarOpen = ref(false)
+    const isSidebarSettingsOpen = ref(false)
 
     const openMobileSidebar = () => {
         isMobileSidebarOpen.value = true
@@ -17,6 +18,9 @@ export const useSidebar = () => {
     }
     const closeMobileSidebar = () => {
         isMobileSidebarOpen.value = false
+    }
+    const closeSidebarSettings = () => {
+        isSidebarSettingsOpen.value = false
     }
 
     onMounted(() => {
@@ -34,9 +38,11 @@ export const useSidebar = () => {
     return {
         isMobileSidebarOpen,
         isSidebarOpen,
+        isSidebarSettingsOpen,
         openMobileSidebar,
         toggleSidebar,
         closeMobileSidebar,
+        closeSidebarSettings,
         onResize,
     }
 }

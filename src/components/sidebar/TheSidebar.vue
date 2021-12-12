@@ -20,22 +20,28 @@
                 border-r border-gray-200
             "
         >
-            <div class="flex h-16 p-3 items-center border-b border-gray-200">
-                <app-hamburger />
+            <div
+                class="
+                    flex
+                    h-16
+                    p-3
+                    items-center
+                    border-b border-gray-200
+                    gap-3
+                "
+            >
+                <slot name="header" />
             </div>
-            <chats-list />
+            <slot name="body" />
         </div>
     </transition>
 </template>
 
 <script>
-import ChatsList from '@/components/chat/ChatsList.vue'
-
 export default {
     name: 'TheSidebar',
     props: {
         isActive: Boolean,
     },
-    components: { ChatsList },
 }
 </script>

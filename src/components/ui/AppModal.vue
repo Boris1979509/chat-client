@@ -44,12 +44,13 @@
                             p-2
                             border-b border-solid border-gray-200
                             rounded-t
+                            gap-4
                         "
                     >
                         <div class="text-lg ml-3 font-semibold">
                             {{ title }}
                         </div>
-                        <app-icon icon="x" @click="hideModal" class="x-close" />
+                        <app-button-close @close="hideModal" />
                     </div>
                     <!--body-->
                     <div class="relative flex-auto">

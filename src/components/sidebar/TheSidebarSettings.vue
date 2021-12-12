@@ -17,19 +17,8 @@
         leave-from-class="translate-x-0"
         leave-to-class="-translate-x-full"
     >
-        <div v-show="isActive" class="fixed w-64 bg-white h-full z-30">
-            <div
-                class="
-                    flex
-                    h-16
-                    p-3
-                    items-center
-                    border-b border-gray-200
-                    gap-3
-                "
-            >
-                <slot name="header" />
-            </div>
+        <div v-show="isActive" class="fixed w-64 bg-white h-full z-40">
+            <slot name="header" />
             <slot name="body" />
         </div>
     </transition>
@@ -39,7 +28,7 @@
 import TheSidebarOverlay from '@/components/sidebar/TheSidebarOverlay.vue'
 
 export default {
-    name: 'TheSidebarMobile',
+    name: 'TheSidebarSettings',
     emits: ['close'],
     props: {
         isActive: Boolean,

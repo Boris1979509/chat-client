@@ -31,17 +31,20 @@
                     </div>
                 </div>
             </div>
-            <app-avatar
-                v-if="!isCurrentUserMessage"
-                :name="username"
-                :classes="['h-10', 'w-10', 'mr-2']"
-            />
+            <div class="relative mr-2">
+                <app-avatar
+                    v-if="!isCurrentUserMessage"
+                    :name="username"
+                    :is-online="isOnline(message.user._id)"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+import { useUserIsOnline } from '@/use/userIsOnline'
 export default {
     name: 'ChatMessageItem',
     props: {
@@ -59,7 +62,7 @@ export default {
         const username = computed(() =>
             !props.isCurrentUserMessage ? props.message.user.username : null
         )
-        return { username }
+        return { ...useUserIsOnline(), username }
     },
 }
 </script>

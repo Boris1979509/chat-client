@@ -14,6 +14,8 @@ import AppModal from '@/components/ui/AppModal.vue'
 import AppTypingLoader from '@/components/ui/AppTypingLoader.vue'
 import AppHamburger from '@/components/ui/AppHamburger.vue'
 import AppAvatar from '@/components/ui/AppAvatar.vue'
+import AppSearch from '@/components/ui/AppSearch.vue'
+import AppButtonClose from '@/components/ui/AppButtonClose.vue'
 export default [
     AppIcon,
     AppInput,
@@ -31,4 +33,6 @@ export default [
     AppTypingLoader,
     AppHamburger,
     AppAvatar,
+    AppSearch,
+    AppButtonClose,
 ]

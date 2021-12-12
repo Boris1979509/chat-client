@@ -25,16 +25,26 @@ import store from '@/store'
 import ChatItem from '@/components/chat/ChatItem.vue'
 import emitters from '@/plugins/socket/emitters'
 import listeners from '@/plugins/socket/listeners'
+import { useSearchChats } from '@/use/searchChats'
 
 export default {
     name: 'ChatsList',
     emits: ['close'],
-    setup(_, { emit }) {
+    props: {
+        searchQuery: String,
+    },
+    setup(props, { emit }) {
         const route = useRoute()
         const socket = inject('socket')
+
         const chatsList = computed(
-            () => store.getters['chat/publicChat'] ?? null
+            () =>
+                useSearchChats(
+                    store.getters['chat/publicChat'],
+                    props.searchQuery
+                ) ?? null
         )
+
         /** Current user */
         const currentUser = computed(() => store.getters['user/user'] ?? null)
         const chatIdsPool = ref([])

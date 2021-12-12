@@ -20,10 +20,14 @@ export default {
             result = format(date, 'HH:mm')
         } else {
             //result = `${diff} days ago.`
-            result = formatDistance(subDays(today, diff), today, {
-                addSuffix: true,
-                locale: ru,
-            })
+            if (diff > 0) {
+                result = formatDistance(subDays(today, diff), today, {
+                    addSuffix: true,
+                    locale: ru,
+                })
+            } else {
+                result = 'Вчера'
+            }
         }
         return result
     },
@@ -34,5 +38,14 @@ export default {
      */
     firstChar(str) {
         return str.charAt(0).toUpperCase()
+    },
+    /**
+     *
+     * @param {string} str
+     * @returns {string}
+     */
+    ucFirst(str) {
+        if (!str) return str
+        return str[0].toUpperCase() + str.slice(1)
     },
 }

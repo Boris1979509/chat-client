@@ -1,12 +1,54 @@
 <template>
     <div class="h-screen min-w-full min-h-full">
-        <the-sidebar :is-active="isSidebarOpen" />
+        <!-- SIDEBAR -->
+        <the-sidebar :is-active="isSidebarOpen">
+            <template v-slot:header>
+                <app-hamburger
+                    @click="isSidebarSettingsOpen = !isSidebarSettingsOpen"
+                />
+                <app-search v-model="searchQuery" />
+            </template>
+            <template v-slot:body>
+                <chats-list :search-query="searchQuery" />
+            </template>
+        </the-sidebar>
+        <!---->
+        <!-- SIDEBAR MOBILE -->
         <the-sidebar-mobile
             :is-active="isMobileSidebarOpen"
             @close="closeMobileSidebar"
-        />
+        >
+            <template v-slot:header>
+                <app-hamburger />
+                <app-search v-model="searchQuery" />
+            </template>
+            <template v-slot:body>
+                <chats-list
+                    @close="closeMobileSidebar"
+                    :search-query="searchQuery"
+                />
+            </template>
+        </the-sidebar-mobile>
+        <!---->
+        <!-- SIDEBAR SETTINGS -->
+        <the-sidebar-settings
+            :is-active="isSidebarSettingsOpen"
+            @close="closeSidebarSettings"
+        >
+            <template v-slot:header>
+                <user-info
+                    v-if="user"
+                    :user="user"
+                    @close="closeSidebarSettings"
+                />
+            </template>
+            <template v-slot:body></template>
+        </the-sidebar-settings>
+        <!---->
         <div :class="[isSidebarOpen ? 'ml-64' : 'ml-0']">
             <current-chat
+                v-if="user"
+                :current-user="user"
                 @toggle-sidebar="toggleSidebar"
                 :is-sidebar-open="isSidebarOpen"
             />
@@ -22,7 +64,10 @@ import emitters from '@/plugins/socket/emitters'
 import CurrentChat from '@/components/chat/CurrentChat.vue'
 import TheSidebar from '@/components/sidebar/TheSidebar.vue'
 import TheSidebarMobile from '@/components/sidebar/TheSidebarMobile.vue'
+import TheSidebarSettings from '@/components/sidebar/TheSidebarSettings.vue'
 import { useSidebar } from '@/use/sidebar'
+import ChatsList from '@/components/chat/ChatsList.vue'
+import UserInfo from '@/components/chat/settings/UserInfo.vue'
 export default {
     name: 'Home',
     setup() {
@@ -30,6 +75,7 @@ export default {
         const socket = inject('socket')
         const store = useStore()
         const user = computed(() => store.getters['user/user'])
+        const searchQuery = ref('') /** Search query */
 
         const isWatchOnce = ref(true)
 
@@ -42,12 +88,15 @@ export default {
         watch(user, (value) => {
             if (value && isWatchOnce.value) setUser()
         })
-        return { ...useSidebar() }
+        return { ...useSidebar(), searchQuery, user }
     },
     components: {
         CurrentChat,
         TheSidebar,
         TheSidebarMobile,
+        TheSidebarSettings,
+        ChatsList,
+        UserInfo,
     },
 }
 </script>

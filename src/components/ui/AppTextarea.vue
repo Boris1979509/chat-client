@@ -3,10 +3,11 @@
         rows="1"
         class="
             w-full
-            focus:outline-none focus:placeholder-gray-400
+            focus:outline-none
             text-gray-600
-            placeholder-gray-600
-            bg-gray-200
+            focus:placeholder-gray-300
+            placeholder-gray-400
+            bg-gray-100
             rounded-lg
             p-3
             resize-none

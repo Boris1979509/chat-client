@@ -10,11 +10,7 @@
             >
         </div>
     </template>
-    <div
-        v-else
-        :class="[isSidebarOpen ? 'left-64' : 'left-0']"
-        class="fixed bottom-0 bg-white right-0 p-3 border-t border-gray-200"
-    >
+    <div v-else class="bg-white p-3 border-t border-gray-200">
         <div class="flex gap-3">
             <app-textarea
                 v-model.trim="message"

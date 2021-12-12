@@ -11,11 +11,7 @@
         "
     >
         <div class="relative">
-            <app-avatar
-                :name="user.username"
-                :classes="['h-10', 'w-10']"
-                :is-online="isOnline"
-            />
+            <app-avatar :name="user.username" :is-online="isOnline" />
         </div>
         <div class="flex-grow">
             <div class="flex items-center gap-1">

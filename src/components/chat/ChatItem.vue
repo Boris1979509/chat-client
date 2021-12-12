@@ -16,7 +16,7 @@
             ease-in-out
         "
     >
-        <app-avatar :name="chatName" />
+        <app-avatar :name="chatName" :classes="['h-12', 'w-12']" />
         <!-- <span
                 v-if="isNewMessageInCurrentChat"
                 class="absolute bg-red-500 right-0 top-0 w-2 h-2 rounded-full"

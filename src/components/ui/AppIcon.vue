@@ -11,6 +11,7 @@ import {
     XIcon,
     CogIcon,
     ArrowLeftIcon,
+    SearchIcon,
 } from '@heroicons/vue/outline'
 import {
     PaperAirplaneIcon,
@@ -39,6 +40,7 @@ export default {
         DotsVerticalIcon,
         MenuIcon,
         ArrowLeftIcon,
+        SearchIcon,
     },
 }
 </script>
