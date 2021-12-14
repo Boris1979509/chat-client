@@ -161,4 +161,9 @@
     .last-circle {
         animation-delay: 0.3s;
     }
+
+    /** messages area */
+    .chat-messages-area {
+        @apply flex flex-col space-y-2 p-3 overflow-y-auto h-[calc(100%-137px)]
+    }
 }
