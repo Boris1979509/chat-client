@@ -4,13 +4,7 @@
         <template v-else>
             <div
                 v-scroll-down="messages.length"
-                class="
-                    flex flex-col
-                    space-y-2
-                    p-3
-                    overflow-y-auto
-                    h-[calc(100%-137px)]
-                "
+                class="flex flex-col space-y-2 p-3 overflow-y-auto h-[calc(100%-137px)]"
             >
                 <chat-message-item
                     v-if="messages.length"
