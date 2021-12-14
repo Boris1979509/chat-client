@@ -1,17 +1,7 @@
 <template>
     <textarea
         rows="1"
-        class="
-            w-full
-            focus:outline-none
-            text-gray-600
-            focus:placeholder-gray-300
-            placeholder-gray-400
-            bg-gray-100
-            rounded-lg
-            p-3
-            resize-none
-        "
+        class="w-full overflow-auto focus:outline-none text-gray-600 focus:placeholder-gray-300 placeholder-gray-400 bg-gray-100 rounded-lg p-3 resize-none"
         ref="root"
         :value="modelValue"
         @input="change"
