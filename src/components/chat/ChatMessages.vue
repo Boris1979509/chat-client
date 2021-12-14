@@ -1,12 +1,16 @@
 <template>
-    <div
-        class="relative flex-1 justify-between flex flex-col h-screen bg-white"
-    >
+    <div class="flex-1 justify-between flex flex-col h-screen bg-white">
         <app-loader v-if="isProgressStatusMessages" />
         <template v-else>
             <div
                 v-scroll-down="messages.length"
-                class="flex flex-col space-y-2 pt-20 pb-4 px-3 overflow-y-auto"
+                class="
+                    flex flex-col
+                    space-y-2
+                    p-3
+                    overflow-y-auto
+                    h-[calc(100%-137px)]
+                "
             >
                 <chat-message-item
                     v-if="messages.length"

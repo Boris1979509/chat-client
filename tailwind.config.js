@@ -1,10 +1,28 @@
+const colors = require("tailwindcss/colors");
 module.exports = {
-  purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-  darkMode: false, // or 'media' or 'class'
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      body: ["Roboto"],
+    },
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      white: colors.white,
+      black: colors.black,
+      gray: colors.gray,
+      red: colors.red,
+      blue: colors.blue,
+      green: colors.green,
+    },
     extend: {
-      fontFamily: {
-        body: ["Roboto"],
+      colors: {
+        // brown: {
+        //   50: "#fdf8f6",
+        // },
+      },
+      letterSpacing: {
+        //wide: ".020em",
       },
       transformOrigin: {
         0: "0%",
@@ -20,12 +38,6 @@ module.exports = {
       center: true,
       padding: ".9375rem",
     },
-  },
-  variants: {
-    extend: {
-      opacity: ["disabled"],
-    },
-    borderColor: ["responsive", "hover", "focus", "focus-within"],
   },
   plugins: [],
 };

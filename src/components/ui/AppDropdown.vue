@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex-grow">
+    <div class="relative grow">
         <div class="flex items-center">
             <div class="ml-auto">
                 <div class="flex items-center">
@@ -12,19 +12,7 @@
                 </div>
                 <transition name="slide-in-right">
                     <div
-                        class="
-                            right-0
-                            top-full
-                            mt-2
-                            bg-gray-50
-                            rounded
-                            absolute
-                            z-10
-                            shadow
-                            border border-gray-300
-                            max-w-xs
-                            text-sm
-                        "
+                        class="right-0 top-full mt-2 bg-gray-50 rounded absolute z-10 shadow border border-gray-300 max-w-xs text-sm"
                         v-show="show"
                     >
                         <slot />

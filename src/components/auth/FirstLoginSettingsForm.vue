@@ -1,10 +1,8 @@
 <template>
     <div class="w-full md:w-1/2 p-5">
         <div class="flex items-center pb-5">
-            <app-icon icon="cog" class="w-6 h-6 text-gray-600" />
-            <h2 class="text-2xl font-bold text-gray-600">
-                {{ $t('General data') }}
-            </h2>
+            <app-icon icon="cog" class="w-6 h-6" />
+            <h2>{{ $t('General data') }}</h2>
         </div>
         <form @submit.prevent="onSubmit" class="space-y-8">
             <app-input

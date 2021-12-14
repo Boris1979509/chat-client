@@ -6,7 +6,7 @@
             :checked="modelValue"
             @change="$emit('update:modelValue', $event.target.checked)"
         />
-        <label :for="name" class="ml-2 -mt-1 text-sm">
+        <label :for="name" class="ml-2 -mt-1">
             <slot />
         </label>
     </div>

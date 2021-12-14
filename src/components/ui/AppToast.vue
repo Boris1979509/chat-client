@@ -18,13 +18,13 @@
                             <div class="mx-3">
                                 <span
                                     :class="['toast-title-' + toast.type]"
-                                    class="font-bold"
+                                    class="font-semibold"
                                     v-text="$t(toast.title)"
                                 ></span>
                                 <p v-text="toast.message"></p>
                             </div>
                         </div>
-                        <app-icon icon="x" @click="close" class="x-close" />
+                        <app-button-close @click="close" class="mr-2 mt-2" />
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
 
 <script>
 import store from '@/store'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 export default {
     name: 'AppToast',

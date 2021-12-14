@@ -1,12 +1,8 @@
 <template>
     <main>
         <div
-            :class="[isSidebarOpen ? 'left-64' : 'left-0']"
             class="
-                fixed
-                inset-y-0
                 bg-white
-                right-0
                 z-10
                 flex
                 items-center
@@ -46,19 +42,21 @@
         </div>
         <no-chats-selected v-if="!selectedChatId || !currentUser" />
         <template v-else>
-            <chat-messages
-                :is-progress-status-messages="isProgressStatusMessages"
-                :messages="currentChatMessages"
-                :current-user-id="currentUser._id"
-            />
-            <chat-message-form
-                @typingMessage="onTypingMessage"
-                @sendMessage="onSendMessage"
-                @joinChat="onJoinChat"
-                :is-join="isUserJoin"
-                :isButtonLoading="isButtonLoading"
-                :is-sidebar-open="isSidebarOpen"
-            />
+            <div class="relative">
+                <chat-messages
+                    :is-progress-status-messages="isProgressStatusMessages"
+                    :messages="currentChatMessages"
+                    :current-user-id="currentUser._id"
+                />
+                <chat-message-form
+                    @typingMessage="onTypingMessage"
+                    @sendMessage="onSendMessage"
+                    @joinChat="onJoinChat"
+                    :is-join="isUserJoin"
+                    :isButtonLoading="isButtonLoading"
+                    :is-sidebar-open="isSidebarOpen"
+                />
+            </div>
         </template>
     </main>
 </template>

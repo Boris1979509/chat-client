@@ -1,10 +1,10 @@
 <template>
     <div
         :class="[...classes, getRandomBgColor]"
-        class="flex items-center justify-center rounded-full flex-shrink-0"
+        class="flex items-center justify-center rounded-full shrink-0"
     >
         <span
-            class="font-bold text-white"
+            class="font-bold text-white text-lg"
             v-text="$filters.firstChar(name)"
         ></span>
     </div>
@@ -12,15 +12,7 @@
         <div
             v-if="isOnline"
             :class="getRandomBgColor"
-            class="
-                w-3
-                h-3
-                border-2 border-white
-                bottom-0
-                right-0
-                absolute
-                rounded-lg
-            "
+            class="w-3 h-3 border-2 border-white bottom-0 right-0 absolute rounded-lg"
         ></div>
     </transition>
 </template>
@@ -48,15 +40,16 @@ export default {
          */
         const bg = [
             'bg-red',
-            'bg-yellow',
-            'bg-green',
-            'bg-indigo',
-            'bg-purple',
             'bg-blue',
-            'bg-pink',
+            // 'bg-orange',
+            // 'bg-green',
+            // 'bg-indigo',
+            // 'bg-purple',
+            // 'bg-sky',
+            // 'bg-pink',
         ]
         /** Opacity */
-        const opacity = ['200', '300', '400', '500', '600', '700']
+        const opacity = ['200', '300', '400', '500']
         /**
          * Returns random index
          */

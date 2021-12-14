@@ -8,6 +8,12 @@ export const useSidebar = () => {
     const openMobileSidebar = () => {
         isMobileSidebarOpen.value = true
     }
+    const openSidebarSettings = () => {
+        if (isMobileSidebarOpen.value) {
+            isMobileSidebarOpen.value = false
+        }
+        isSidebarSettingsOpen.value = true
+    }
 
     const toggleSidebar = () => {
         if (window.innerWidth >= 1024) {
@@ -43,6 +49,7 @@ export const useSidebar = () => {
         toggleSidebar,
         closeMobileSidebar,
         closeSidebarSettings,
+        openSidebarSettings,
         onResize,
     }
 }

@@ -1,11 +1,9 @@
 <template>
-    <div class="h-screen min-w-full min-h-full">
+    <div class="h-screen min-w-full min-h-full overflow-hidden">
         <!-- SIDEBAR -->
         <the-sidebar :is-active="isSidebarOpen">
             <template v-slot:header>
-                <app-hamburger
-                    @click="isSidebarSettingsOpen = !isSidebarSettingsOpen"
-                />
+                <app-hamburger @click="openSidebarSettings" />
                 <app-search v-model="searchQuery" />
             </template>
             <template v-slot:body>
@@ -19,7 +17,7 @@
             @close="closeMobileSidebar"
         >
             <template v-slot:header>
-                <app-hamburger />
+                <app-hamburger @click="openSidebarSettings" />
                 <app-search v-model="searchQuery" />
             </template>
             <template v-slot:body>

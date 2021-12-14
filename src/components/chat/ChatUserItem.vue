@@ -1,19 +1,11 @@
 <template>
     <div
-        class="
-            flex
-            items-center
-            gap-3
-            px-6
-            py-3
-            cursor-default
-            hover:bg-gray-100
-        "
+        class="flex items-center gap-3 px-6 py-3 cursor-default hover:bg-gray-100"
     >
         <div class="relative">
             <app-avatar :name="user.username" :is-online="isOnline" />
         </div>
-        <div class="flex-grow">
+        <div class="grow">
             <div class="flex items-center gap-1">
                 <span
                     v-text="user.username"

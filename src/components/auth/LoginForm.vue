@@ -1,11 +1,8 @@
 <template>
     <div class="w-full md:w-1/2 p-5">
         <div class="flex items-center pb-5">
-            <app-icon icon="lock-open" class="w-6 h-6 text-gray-600" />
-            <h2
-                class="text-2xl font-bold text-gray-600"
-                v-text="$t('Login')"
-            ></h2>
+            <app-icon icon="lock-open" class="w-6 h-6" />
+            <h2>{{ $t('Login') }}</h2>
         </div>
         <form @submit.prevent="onSubmit" class="space-y-8">
             <app-input
@@ -27,7 +24,7 @@
                 $t('Login')
             }}</app-button>
         </form>
-        <div class="flex justify-between mt-5">
+        <div class="auth-subform">
             <router-link
                 :to="{ name: 'forgot' }"
                 class="text-sm hover:underline"

@@ -10,32 +10,21 @@
             >
         </div>
     </template>
-    <div v-else class="bg-white p-3 border-t border-gray-200">
+    <div
+        v-else
+        class="bg-white p-3 border-t border-gray-200 absolute right-0 left-0 h-[73px] bottom-[64px]"
+    >
         <div class="flex gap-3">
             <app-textarea
                 v-model.trim="message"
                 :isFocus="isFocus"
-                class="flex-grow-2"
+                class="grow-2"
             />
-            <div class="flex-grow-1">
+            <div class="grow-1">
                 <button
                     @click="sendMessage"
                     type="button"
-                    class="
-                        inline-flex
-                        items-center
-                        justify-center
-                        rounded-full
-                        h-12
-                        w-12
-                        transition
-                        duration-500
-                        ease-in-out
-                        text-white
-                        bg-blue-600
-                        hover:bg-blue-400
-                        focus:outline-none
-                    "
+                    class="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-white bg-blue-600 hover:bg-blue-400 focus:outline-none"
                 >
                     <app-icon
                         icon="paper-airplane"

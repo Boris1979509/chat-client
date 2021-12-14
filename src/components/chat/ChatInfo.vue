@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center gap-3 px-6 py-3">
         <app-avatar :name="chatName" :classes="['w-12', 'h-12']" />
-        <div class="flex-grow">
+        <div class="grow">
             <div class="flex items-center gap-1">
                 <app-icon icon="user-group" class="w-4 h-4 text-gray-600" />
                 <span
