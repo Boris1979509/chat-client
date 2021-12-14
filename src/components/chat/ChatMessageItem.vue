@@ -22,7 +22,12 @@
                         ]"
                     >
                         <template v-if="username">
-                            <div>{{ username }}</div>
+                            <a
+                                class="underline"
+                                href="#"
+                                @click.prevent="showUserInfoModal"
+                                >{{ username }}</a
+                            >
                         </template>
                         <div>{{ message.text }}</div>
                         <div class="flex flex-col items-end text-xs">
@@ -31,7 +36,10 @@
                     </div>
                 </div>
             </div>
-            <div class="relative mr-2">
+            <div
+                class="relative mr-2 cursor-pointer"
+                @click="showUserInfoModal"
+            >
                 <app-avatar
                     v-if="!isCurrentUserMessage"
                     :name="username"
@@ -40,11 +48,20 @@
             </div>
         </div>
     </div>
+    <app-modal
+        v-if="modal"
+        v-model:state="modal"
+        :title="$t('Information about user')"
+    >
+        <user-info v-if="user" :user="user" />
+    </app-modal>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import store from '@/store'
 import { useUserIsOnline } from '@/use/userIsOnline'
+import UserInfo from '@/components/chat/settings/UserInfo.vue'
 export default {
     name: 'ChatMessageItem',
     props: {
@@ -58,11 +75,37 @@ export default {
         },
     },
     setup(props) {
+        const user = ref(null)
+        const currentChatInfo = computed(
+            () => store.getters['chat/currentChat'] ?? null
+        )
+        const modal = ref(false)
         /** If not curren user show username */
         const username = computed(() =>
             !props.isCurrentUserMessage ? props.message.user.username : null
         )
-        return { ...useUserIsOnline(), username }
+        /** Modal user info */
+        const showUserInfoModal = () => {
+            if (currentChatInfo.value.users.length && props.message.user._id) {
+                const res = currentChatInfo.value.users.filter(
+                    (user) => user._id === props.message.user._id
+                )
+                if (res) {
+                    user.value = res[0]
+                    modal.value = true
+                }
+            }
+        }
+        return {
+            ...useUserIsOnline(),
+            username,
+            showUserInfoModal,
+            modal,
+            user,
+        }
+    },
+    components: {
+        UserInfo,
     },
 }
 </script>
