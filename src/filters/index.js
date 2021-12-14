@@ -1,9 +1,11 @@
 import {
-    isToday,
-    differenceInDays,
-    format,
-    formatDistance,
-    subDays,
+    // isToday,
+    // differenceInDays,
+    formatRelative,
+    // format,
+    // formatDistance,
+    // isYesterday,
+    // subDays,
 } from 'date-fns'
 import { ru } from 'date-fns/locale'
 export default {
@@ -12,24 +14,36 @@ export default {
             return
         }
         const date = new Date(value)
-        const today = new Date()
-        const diff = differenceInDays(new Date(), date)
+        // const today = new Date()
+        // const diff = differenceInDays(new Date(), date)
 
-        let result = ''
-        if (isToday(date)) {
-            result = format(date, 'HH:mm')
-        } else {
-            //result = `${diff} days ago.`
-            if (diff > 0) {
-                result = formatDistance(subDays(today, diff), today, {
-                    addSuffix: true,
-                    locale: ru,
-                })
-            } else {
-                result = 'Вчера'
-            }
+        const formatRelativeLocale = {
+            lastWeek: "'На прошлой неделе'",
+            yesterday: "'Вчера в' HH.mm",
+            today: "'Сегодня в' HH.mm",
+            tomorrow: "''",
+            nextWeek: "''",
+            other: 'dd.MM.yyyy',
         }
-        return result
+        // let result = ''
+        // if (isToday(date)) {
+        //     result = format(date, 'HH:mm')
+        // } else if (isYesterday(date)) {
+        //     result = formatRelative(date, baseDate, [options])
+        // } else {
+        //     //result = `${diff} days ago.`
+        //     if (diff > 0) {
+        //         result = formatDistance(subDays(today, diff), today, {
+        //             addSuffix: true,
+        //             locale: ru,
+        //         })
+        //     }
+        // }
+        const locale = {
+            ...ru,
+            formatRelative: (token) => formatRelativeLocale[token],
+        }
+        return formatRelative(date, new Date(), { locale })
     },
     /**
      * Get only first char to uppercase
