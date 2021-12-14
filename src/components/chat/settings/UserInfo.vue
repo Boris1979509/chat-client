@@ -1,8 +1,7 @@
 <template>
     <div class="p-3 border-b border-gray-200">
-        <div class="flex justify-between">
+        <div class="flex">
             <app-avatar :name="user.username" :classes="['h-12', 'w-12']" />
-            <app-button-close @close="close" />
         </div>
         <div class="mt-3 space-y-1">
             <div class="text-md font-semibold">
@@ -29,18 +28,11 @@
 <script>
 export default {
     name: 'UserInfo',
-    emits: ['close'],
     props: {
         user: {
             type: Object,
             required: true,
         },
-    },
-    setup(_, { emit }) {
-        const close = () => {
-            emit('close')
-        }
-        return { close }
     },
 }
 </script>

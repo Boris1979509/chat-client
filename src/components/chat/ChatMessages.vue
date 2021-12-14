@@ -2,10 +2,7 @@
     <div class="flex-1 justify-between flex flex-col h-screen bg-white">
         <app-loader v-if="isProgressStatusMessages" />
         <template v-else>
-            <div
-                v-scroll-down="messages.length"
-                class="flex flex-col space-y-2 p-3 overflow-y-auto h-[calc(100%-137px)]"
-            >
+            <div v-scroll-down="messages.length" class="chat-messages-area">
                 <chat-message-item
                     v-if="messages.length"
                     v-for="message in messages"

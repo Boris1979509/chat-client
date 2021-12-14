@@ -17,8 +17,14 @@
         leave-from-class="translate-x-0"
         leave-to-class="-translate-x-full"
     >
-        <div v-show="isActive" class="fixed w-64 bg-white h-full z-40">
-            <slot name="header" />
+        <div v-show="isActive" class="fixed w-64 bg-white h-full z-30">
+            <div class="relative">
+                <app-button-close
+                    @close="close"
+                    class="absolute right-3 top-3"
+                />
+                <slot name="header" />
+            </div>
             <slot name="body" />
         </div>
     </transition>

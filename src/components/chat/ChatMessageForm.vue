@@ -10,10 +10,7 @@
             >
         </div>
     </template>
-    <div
-        v-else
-        class="bg-white p-3 border-t border-gray-200 absolute right-0 left-0 h-[73px] bottom-[64px]"
-    >
+    <div v-else class="chat-message-form">
         <div class="flex gap-3">
             <app-textarea
                 v-model.trim="message"
@@ -25,7 +22,7 @@
                 <button
                     @click="sendMessage"
                     type="button"
-                    class="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-white bg-blue-600 hover:bg-blue-400 focus:outline-none"
+                    class="chat-message-button"
                 >
                     <app-icon
                         icon="paper-airplane"
