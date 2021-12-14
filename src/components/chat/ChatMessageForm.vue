@@ -19,6 +19,7 @@
                 v-model.trim="message"
                 :isFocus="isFocus"
                 class="grow-2"
+                @keyup.enter.exact.prevent="sendMessage"
             />
             <div class="grow-1">
                 <button
