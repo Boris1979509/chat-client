@@ -6,7 +6,7 @@ export default ({ mode }) => {
   // import.meta.env.VITE_NAME available here with: process.env.VITE_NAME
   // import.meta.env.VITE_PORT available here with: process.env.VITE_PORT
   return defineConfig({
-    base: process.env.NODE_ENV === "production" ? "/chat-client/" : "./",
+    base: process.env.NODE_ENV === "production" ? "/chat-client/" : "/",
     plugins: [vue()],
     resolve: {
       alias: {
