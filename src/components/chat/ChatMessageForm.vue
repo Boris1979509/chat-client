@@ -17,7 +17,7 @@
                     class="grow-2"
                     @keyup.enter.exact.prevent="sendMessage"
                 />
-                <div class="grow-1">
+                <div class="grow">
                     <button
                         @click="sendMessage"
                         type="button"
