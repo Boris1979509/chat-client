@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview --port 8080"
+    "serve": "vite preview --port 8080",
+    "deploy": "cd dist && cp index.html 404.html"
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
