@@ -1,6 +1,6 @@
 <template>
-    <template v-if="!isJoin">
-        <div class="flex justify-center p-2">
+    <div class="chat-message-form flex justify-center">
+        <template v-if="!isJoin">
             <app-button
                 :isButtonLoading="isButtonLoading"
                 @click="joinChat"
@@ -8,29 +8,29 @@
                 type="button"
                 >{{ $t('Join chat') }}</app-button
             >
-        </div>
-    </template>
-    <div v-else class="chat-message-form">
-        <div class="flex gap-3">
-            <app-textarea
-                v-model.trim="message"
-                :isFocus="isFocus"
-                class="grow-2"
-                @keyup.enter.exact.prevent="sendMessage"
-            />
-            <div class="grow-1">
-                <button
-                    @click="sendMessage"
-                    type="button"
-                    class="chat-message-button"
-                >
-                    <app-icon
-                        icon="paper-airplane"
-                        class="h-6 w-6 transform rotate-90"
-                    />
-                </button>
+        </template>
+        <template v-else>
+            <div class="flex gap-3 grow">
+                <app-textarea
+                    v-model.trim="message"
+                    :isFocus="isFocus"
+                    class="grow-2"
+                    @keyup.enter.exact.prevent="sendMessage"
+                />
+                <div class="grow-1">
+                    <button
+                        @click="sendMessage"
+                        type="button"
+                        class="chat-message-button"
+                    >
+                        <app-icon
+                            icon="paper-airplane"
+                            class="h-6 w-6 transform rotate-90"
+                        />
+                    </button>
+                </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 
