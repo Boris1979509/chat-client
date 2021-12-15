@@ -35,7 +35,7 @@
 
     /** Button success */
     .btn.btn-success {
-        @apply text-green-700 border border-green-500;
+        @apply text-green-500 border border-green-500;
     }
 
     .btn.btn-success:hover:not([disabled]) {
@@ -44,7 +44,7 @@
 
     .btn.btn-success .btn-loader {
         border-top-color: transparent !important;
-        @apply w-5 h-5 border-2 border-green-400 border-solid rounded-full animate-spin;
+        @apply w-5 h-5 border-2 border-green-500 border-solid rounded-full animate-spin;
     }
 
     /** INPUT FLOATING, VALIDATE */
