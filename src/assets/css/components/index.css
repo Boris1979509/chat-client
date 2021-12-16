@@ -147,19 +147,19 @@
     .first-circle,
     .second-circle,
     .last-circle {
-        @apply w-[5px] h-[5px];
+        @apply w-[5px] h-[5px] bg-blue-400 rounded-full animate-bounce;
     }
 
     .first-circle {
-        animation-delay: 0.1s;
+        @apply animation-delay-75;
     }
 
     .second-circle {
-        animation-delay: 0.2s;
+        @apply animation-delay-100;
     }
 
     .last-circle {
-        animation-delay: 0.3s;
+        @apply animation-delay-150;
     }
 
     /** messages area */
