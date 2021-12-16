@@ -19,8 +19,8 @@ export default {
 
         const formatRelativeLocale = {
             lastWeek: "'На прошлой неделе'",
-            yesterday: "'Вчера в' HH.mm",
-            today: "'Сегодня в' HH.mm",
+            yesterday: "'Вчера в' HH:mm",
+            today: "'Сегодня в' HH:mm",
             tomorrow: "''",
             nextWeek: "''",
             other: 'dd.MM.yyyy',
