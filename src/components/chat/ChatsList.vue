@@ -59,7 +59,6 @@ export default {
         )
         /** Get chat */
         const getChat = async (chatId) => {
-            console.log(chatId)
             await store.dispatch('chat/selectChat', chatId)
             socket.emit(emitters.FETCH_COUNT_SOCKETS_IN_ROOM, {
                 chatId,
