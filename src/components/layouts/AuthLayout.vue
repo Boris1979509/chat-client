@@ -1,8 +1,9 @@
 <template>
+    <app-bg-pattern />
     <div class="container mx-auto">
         <div class="flex justify-center items-center h-screen">
             <div
-                class="flex w-full lg:w-1/2 overflow-hidden rounded-lg shadow ring-1 ring-gray-300 ring-inset"
+                class="flex w-full z-1 bg-white lg:w-1/2 overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-300 ring-inset"
             >
                 <app-image :src="imgUrl" alt="App chat" />
                 <router-view />

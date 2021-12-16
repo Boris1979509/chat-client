@@ -21,6 +21,9 @@ module.exports = {
         //   50: "#fdf8f6",
         // },
       },
+      backgroundImage: {
+        "chat-pattern": "url('/src/assets/pattern-30.svg')",
+      },
       letterSpacing: {
         //wide: ".020em",
       },
@@ -39,5 +42,5 @@ module.exports = {
       padding: ".9375rem",
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animation-delay")],
 };

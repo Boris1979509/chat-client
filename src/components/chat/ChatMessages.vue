@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-1 justify-between flex flex-col h-screen bg-white">
+    <div class="relative flex-1 justify-between flex flex-col h-screen">
         <app-loader v-if="isProgressStatusMessages" />
         <template v-else>
             <div v-scroll-down="messages.length" class="chat-messages-area">
@@ -15,6 +15,7 @@
                 <empty-chat-messages v-else />
             </div>
         </template>
+        <app-bg-pattern />
     </div>
 </template>
 

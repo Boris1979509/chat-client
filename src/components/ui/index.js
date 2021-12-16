@@ -16,6 +16,7 @@ import AppHamburger from '@/components/ui/AppHamburger.vue'
 import AppAvatar from '@/components/ui/AppAvatar.vue'
 import AppSearch from '@/components/ui/AppSearch.vue'
 import AppButtonClose from '@/components/ui/AppButtonClose.vue'
+import AppBgPattern from '@/components/ui/AppBgPattern.vue'
 export default [
     AppIcon,
     AppInput,
@@ -35,4 +36,5 @@ export default [
     AppAvatar,
     AppSearch,
     AppButtonClose,
+    AppBgPattern,
 ]
