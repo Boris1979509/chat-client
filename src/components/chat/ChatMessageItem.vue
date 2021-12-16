@@ -30,8 +30,10 @@
                             >
                         </template>
                         <div>{{ message.text }}</div>
-                        <div class="flex flex-col items-end text-xs">
-                            <div>{{ $filters.passedTime(message.time) }}</div>
+                        <div class="flex flex-col items-end">
+                            <div class="leading-3 text-xs">
+                                {{ $filters.passedTime(message.time) }}
+                            </div>
                         </div>
                     </div>
                 </div>
