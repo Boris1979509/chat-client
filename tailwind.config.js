@@ -22,7 +22,7 @@ module.exports = {
         // },
       },
       backgroundImage: {
-        "chat-pattern": "url('/src/assets/pattern-30.svg')",
+        "chat-pattern": "url('/src/assets/bg-pattern.svg')",
       },
       letterSpacing: {
         //wide: ".020em",
