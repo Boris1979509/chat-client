@@ -27,7 +27,6 @@ onAuthStateChanged(authUser, async (userData) => {
     } else {
         localStorage.removeItem(import.meta.env.VITE_AUTH_TOKEN_KEY)
     }
-    console.log(userData)
     await store.dispatch('setLoggedIn', !!userData)
     await store.dispatch('setUserState', userData)
 })

@@ -47,7 +47,6 @@ export default {
         async getUser({ commit }, email) {
             try {
                 const response = await axios.get(`/users/${email}`)
-                console.log(response.data)
                 commit(SET_USER, response.data)
             } catch (error) {
                 console.log(error)
