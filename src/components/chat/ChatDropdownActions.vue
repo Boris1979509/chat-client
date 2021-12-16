@@ -3,14 +3,7 @@
         <li v-if="selectedChatId">
             <a
                 href="#"
-                class="
-                    transition
-                    duration-200
-                    block
-                    px-3
-                    py-1
-                    hover:bg-gray-100
-                "
+                class="transition duration-200 block px-3 py-1 hover:bg-gray-100"
                 @click.prevent="
                     $emit('show-info-chat-group-from-dropdown', true)
                 "
@@ -20,14 +13,7 @@
         <li v-if="isJoin">
             <a
                 href="#"
-                class="
-                    transition
-                    duration-200
-                    block
-                    px-3
-                    py-1
-                    hover:bg-gray-100
-                "
+                class="transition duration-200 block px-3 py-1 hover:bg-gray-100"
                 @click.prevent="$emit('leave-chat')"
                 v-text="$t('Leave chat')"
             ></a>
@@ -35,14 +21,7 @@
         <li>
             <a
                 href="#"
-                class="
-                    transition
-                    duration-200
-                    block
-                    px-3
-                    py-1
-                    hover:bg-gray-100
-                "
+                class="transition duration-200 block px-3 py-1 hover:bg-gray-100"
                 @click.prevent="logout"
                 v-text="$t('Logout')"
             ></a>
@@ -51,10 +30,7 @@
 </template>
 
 <script>
-import store from '@/store'
-import router from '@/router'
-import { useI18n } from 'vue-i18n'
-
+import { useAuthLogout } from '@/use/auth/logout'
 export default {
     name: 'ChatDropdownActions',
     emits: ['leave-chat', 'show-info-chat-group-from-dropdown'],
@@ -68,22 +44,7 @@ export default {
         },
     },
     setup() {
-        const { t } = useI18n() // translate
-
-        const logout = async () => {
-            await store.dispatch('auth/logout')
-            router.push({ name: 'login' })
-            store.dispatch(
-                'setNotify',
-                {
-                    type: 'success',
-                    message: t('Logout Message'),
-                },
-                { root: true }
-            )
-        }
-
-        return { logout }
+        return { ...useAuthLogout() }
     },
 }
 </script>
