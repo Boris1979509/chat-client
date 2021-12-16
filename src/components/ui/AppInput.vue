@@ -2,14 +2,7 @@
     <div>
         <div :class="inputBorderState" class="border-b-2 relative my-4">
             <input
-                class="
-                    float-input
-                    block
-                    w-full
-                    appearance-none
-                    focus:outline-none
-                    bg-transparent
-                "
+                class="float-input block w-full appearance-none focus:outline-none bg-transparent"
                 :type="type"
                 :name="name"
                 :value="modelValue"
@@ -21,15 +14,7 @@
             <label
                 v-text="$t(label)"
                 :class="{ 'is-invalid': errorMessage }"
-                class="
-                    float-label
-                    -z-1
-                    text-gray-500
-                    absolute
-                    top-0
-                    duration-300
-                    origin-0
-                "
+                class="float-label z-0 text-gray-500 absolute top-0 duration-300 origin-0"
             ></label>
         </div>
         <div

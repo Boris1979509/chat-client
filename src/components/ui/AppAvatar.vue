@@ -40,16 +40,16 @@ export default {
          */
         const bg = [
             'bg-red',
-            'bg-blue',
+            // 'bg-blue',
             // 'bg-orange',
-            // 'bg-green',
+            'bg-green',
             // 'bg-indigo',
             // 'bg-purple',
             // 'bg-sky',
             // 'bg-pink',
         ]
         /** Opacity */
-        const opacity = ['200', '300', '400', '500']
+        const opacity = ['400']
         /**
          * Returns random index
          */
