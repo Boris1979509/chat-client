@@ -2,7 +2,7 @@
   "name": "chat-client",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 8080",
     "build": "vite build",
     "serve": "vite preview --port 8080",
     "deploy": "cd dist && cp index.html 404.html"
