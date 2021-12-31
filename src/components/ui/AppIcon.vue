@@ -18,6 +18,8 @@ import {
     UserGroupIcon,
     DotsVerticalIcon,
     MenuIcon,
+    EyeIcon,
+    EyeOffIcon,
 } from '@heroicons/vue/solid'
 
 export default {
@@ -41,6 +43,8 @@ export default {
         MenuIcon,
         ArrowLeftIcon,
         SearchIcon,
+        EyeIcon,
+        EyeOffIcon,
     },
 }
 </script>

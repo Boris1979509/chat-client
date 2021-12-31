@@ -1,6 +1,13 @@
 <template>
     <div>
         <div :class="inputBorderState" class="border-b-2 relative my-4">
+            <template v-if="isTypePassword">
+                <app-icon
+                    :icon="icon"
+                    @click="switchVisibility"
+                    class="absolute bg-white right-0 top-[calc(100%-1.3rem)] w-5 h-5 cursor-pointer transition duration-200 ease-in-out text-gray-300 hover:text-gray-600"
+                />
+            </template>
             <input
                 class="float-input block w-full appearance-none focus:outline-none bg-transparent"
                 :type="type"
@@ -8,13 +15,13 @@
                 :value="modelValue"
                 @input="change"
                 placeholder=" "
-                ref="focus"
+                ref="input"
                 :autocomplete="name"
             />
             <label
                 v-text="$t(label)"
                 :class="{ 'is-invalid': errorMessage }"
-                class="float-label z-0 text-gray-500 absolute top-0 duration-300 origin-0"
+                class="float-label -z-1 text-gray-500 absolute top-0 duration-300 origin-0"
             ></label>
         </div>
         <div
@@ -26,7 +33,8 @@
 </template>
 
 <script>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, toRefs } from 'vue'
+import { usePasswordVisibility } from '@/use/password.visibility'
 export default {
     name: 'AppInput',
     emits: ['update:modelValue'],
@@ -56,19 +64,25 @@ export default {
         },
     },
     setup(props, { emit }) {
-        const focus = ref(null)
+        const input = ref(null)
+        const { type, errorMessage, isActiveFocus } = toRefs(props)
         const change = (event) => {
             emit('update:modelValue', event.target.value)
         }
-        const inputBorderState = computed(() => {
-            return props.errorMessage
+        const inputBorderState = computed(() =>
+            errorMessage.value
                 ? 'border-red-300 focus-within:border-red-500'
                 : 'border-gray-300 focus-within:border-blue-500'
-        })
+        )
         onMounted(() => {
-            if (props.isActiveFocus) focus.value.focus()
+            if (isActiveFocus.value) input.value.focus()
         })
-        return { change, focus, inputBorderState }
+        return {
+            change,
+            input,
+            inputBorderState,
+            ...usePasswordVisibility(type, input),
+        }
     },
 }
 </script>
