@@ -74,7 +74,9 @@ export default {
         const store = useStore()
         const user = computed(() => store.getters['user/user'])
         const searchQuery = ref('') /** Search query */
-
+        const currentUserId = computed(() =>
+            user.value ? user.value._id : null
+        )
         const isWatchOnce = ref(true)
 
         const setUser = () => {
@@ -83,9 +85,19 @@ export default {
             }
             isWatchOnce.value = false
         }
+        /** Logout user */
+        const logoutUser = () => {
+            socket.emit(emitters.LOGOUT, currentUserId.value)
+        }
         watch(user, (value) => {
             if (value && isWatchOnce.value) setUser()
         })
+        store.watch(
+            (_, getters) => getters['auth/isLoggedIn'],
+            (value) => {
+                if (value === false) logoutUser()
+            }
+        )
         return { ...useSidebar(), searchQuery, user }
     },
     components: {
