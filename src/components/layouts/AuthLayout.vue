@@ -1,7 +1,7 @@
 <template>
     <app-bg-pattern />
     <div class="container mx-auto">
-        <div class="flex justify-center items-center h-screen">
+        <div class="flex justify-center items-center min-h-screen">
             <div
                 class="flex w-full z-10 bg-white lg:w-1/2 overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-300 ring-inset"
             >

@@ -5,7 +5,7 @@
                 <app-icon
                     :icon="icon"
                     @click="switchVisibility"
-                    class="absolute bg-white right-0 top-[calc(100%-1.3rem)] w-5 h-5 cursor-pointer transition duration-200 ease-in-out text-gray-300 hover:text-gray-600"
+                    class="absolute bg-none right-0 top-[calc(100%-1.3rem)] w-5 h-5 cursor-pointer transition duration-200 ease-in-out text-gray-300 hover:text-gray-600"
                 />
             </template>
             <input

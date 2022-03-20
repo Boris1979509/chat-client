@@ -6,59 +6,34 @@
                 class="opacity-50 fixed inset-0 z-20 bg-black"
             ></div>
         </transition>
-        <div
-            v-show="state"
-            @click.self="hideModal"
-            class="
-                flex
-                overflow-x-hidden overflow-y-auto
-                fixed
-                inset-0
-                z-30
-                outline-none
-                focus:outline-none
-                justify-center
-                items-center
-            "
-        >
-            <div class="relative w-auto my-6 mx-auto max-w-3xl">
+        <transition name="fade">
+            <div
+                v-show="state"
+                class="overflow-x-hidden overflow-y-auto fixed inset-0 z-30"
+            >
                 <div
-                    class="
-                        border-0
-                        rounded-lg
-                        shadow-lg
-                        relative
-                        flex flex-col
-                        w-full
-                        bg-white
-                        outline-none
-                        focus:outline-none
-                        pb-6
-                    "
+                    @click.self="hideModal"
+                    class="relative flex flex-col items-center justify-center min-h-full"
                 >
                     <div
-                        class="
-                            flex
-                            items-center
-                            justify-between
-                            p-2
-                            border-b border-solid border-gray-200
-                            rounded-t
-                            gap-4
-                        "
+                        class="max-w-lg border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none pb-6"
                     >
-                        <div class="text-lg ml-3 font-semibold">
-                            {{ title }}
+                        <div
+                            class="flex items-center justify-between p-2 border-b border-solid border-gray-200 rounded-t gap-4"
+                        >
+                            <div class="text-lg ml-3 font-semibold">
+                                {{ title }}
+                            </div>
+                            <app-button-close @close="hideModal" />
                         </div>
-                        <app-button-close @close="hideModal" />
-                    </div>
-                    <!--body-->
-                    <div class="relative flex-auto">
-                        <slot />
+                        <!--body-->
+                        <div class="relative flex-auto">
+                            <slot />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </transition>
     </teleport>
 </template>
 

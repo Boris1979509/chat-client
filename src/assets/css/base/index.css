@@ -5,8 +5,9 @@
         @apply relative
     }
 
+    html,
     body {
-        @apply flex flex-col w-screen h-screen font-body font-normal text-gray-600 overflow-x-hidden tracking-wide;
+        @apply h-full font-body font-normal text-base text-gray-600 tracking-wide;
     }
 
     h1 {
@@ -15,5 +16,9 @@
 
     h2 {
         @apply text-2xl font-bold;
+    }
+
+    #app {
+        @apply min-h-full flex flex-col overflow-hidden;
     }
 }

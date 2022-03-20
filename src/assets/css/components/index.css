@@ -164,7 +164,7 @@
 
     /** messages area */
     .chat-messages-area {
-        @apply flex flex-col space-y-2 p-3 overflow-y-auto h-[calc(100%-137px)]
+        @apply flex flex-col space-y-2 p-3 overflow-y-auto overflow-x-hidden h-[calc(100%-137px)]
     }
 
     .chat-message-form {
@@ -173,5 +173,9 @@
 
     .chat-message-button {
         @apply inline-flex items-center justify-center rounded-full h-12 w-12 text-white bg-blue-600
+    }
+
+    .chat-message {
+        overflow-wrap: anywhere;
     }
 }

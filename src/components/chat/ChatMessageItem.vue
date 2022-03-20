@@ -10,11 +10,11 @@
                         ? 'order-1 items-end'
                         : 'order-2 items-start',
                 ]"
-                class="flex flex-col space-y-2 text-sm max-w-xs"
+                class="space-y-2 text-sm"
             >
                 <div>
                     <div
-                        class="px-4 py-2 rounded-lg inline-block"
+                        class="px-4 py-2 rounded-lg inline-block flex flex-col items-end max-w-md"
                         :class="[
                             isCurrentUserMessage
                                 ? 'rounded-br-none bg-blue-600 text-white'
@@ -30,10 +30,8 @@
                             >
                         </template>
                         <div>{{ message.text }}</div>
-                        <div class="flex flex-col items-end">
-                            <div class="leading-3 text-xs">
-                                {{ $filters.passedTime(message.time) }}
-                            </div>
+                        <div class="leading-3 text-xs">
+                            {{ $filters.passedTime(message.time) }}
                         </div>
                     </div>
                 </div>
