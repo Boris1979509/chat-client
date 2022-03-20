@@ -42,5 +42,12 @@ module.exports = {
       padding: ".9375rem",
     },
   },
-  plugins: [require("tailwindcss-animation-delay")],
+  plugins: [
+    require("tailwindcss-animation-delay"),
+    require("tailwindcss-animatecss")({
+      classes: ["animate__animated", "animate__fadeIn", "animate__bounceIn"],
+      settings: {},
+      variants: [],
+    }),
+  ],
 };

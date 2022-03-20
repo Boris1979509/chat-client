@@ -16,6 +16,7 @@
     "postcss-import": "^14.0.2",
     "socket.io": "^4.3.2",
     "socket.io-client": "^4.3.2",
+    "tailwindcss-animatecss": "^0.3.3",
     "tailwindcss-animation-delay": "^1.0.7",
     "vee-validate": "^4.5.5",
     "vue": "^3.2.16",
