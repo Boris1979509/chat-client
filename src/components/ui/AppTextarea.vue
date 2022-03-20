@@ -5,6 +5,7 @@
         ref="root"
         :value="modelValue"
         @input="change"
+        @keypress.enter.prevent="change"
         :placeholder="$t('Write Something')"
     ></textarea>
 </template>
