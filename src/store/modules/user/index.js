@@ -13,6 +13,7 @@ export default {
         allUsersInCurrentChat: null,
         isProgressStatusUserInfo: true,
         isProgressStatusUsersInChat: true,
+        isUserInfo: false,
     },
     getters: {
         user: ({ user }) => user,
@@ -22,6 +23,7 @@ export default {
             isProgressStatusUsersInChat,
         allUsersInCurrentChat: ({ allUsersInCurrentChat }) =>
             allUsersInCurrentChat,
+        isUserInfo: ({ user }) => !!user,
     },
     mutations: {
         [SET_USER](state, obj) {
