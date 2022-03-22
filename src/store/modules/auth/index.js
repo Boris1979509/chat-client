@@ -12,7 +12,7 @@ export default {
         isLoggedIn: ({ isLoggedIn }) => isLoggedIn,
         isProgressStatusAuth: ({ isProgressStatusAuth }) =>
             isProgressStatusAuth,
-        isNewUser: ({ isNewUser }) => isNewUser,
+        isNewUser: ({ isLoggedIn }) => isLoggedIn,
     },
     mutations: {
         [IS_LOGGED_IN](state, bool) {
@@ -66,7 +66,6 @@ export default {
                     email,
                     password,
                 })
-                commit(IS_NEW_USER, true)
             } catch (error) {
                 dispatch(
                     'setNotify',
