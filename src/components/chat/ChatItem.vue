@@ -3,38 +3,26 @@
         href="#"
         @click.prevent="selectChat"
         :class="[selectedChat ? 'bg-gray-100' : 'hover:bg-gray-50']"
-        class="
-            px-3
-            py-2
-            cursor-pointer
-            flex
-            items-center
-            text-sm
-            focus:outline-none
-            transition
-            duration-200
-            ease-in-out
-        "
+        class="px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none transition duration-200 ease-in-out"
     >
         <app-avatar :name="chatName" :classes="['h-12', 'w-12']" />
         <!-- <span
                 v-if="isNewMessageInCurrentChat"
                 class="absolute bg-red-500 right-0 top-0 w-2 h-2 rounded-full"
             ></span> -->
-        <div class="ml-2 w-full truncate">
+        <div class="ml-2 w-full overflow-hidden">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-1">
                     <app-icon icon="user-group" class="w-4 h-4 text-gray-600" />
-                    <span
+                    <div
                         v-text="chatName"
-                        class="block font-semibold text-base text-gray-600"
-                    >
-                    </span>
+                        class="font-semibold text-base text-gray-600 truncate"
+                    ></div>
                 </div>
                 <span
                     v-if="lastMessageTime"
                     v-text="$filters.passedTime(lastMessageTime)"
-                    class="block ml-2 text-xs text-gray-600"
+                    class="block ml-2 text-xs text-gray-600 truncate"
                 ></span>
             </div>
             <div class="truncate block text-xs">

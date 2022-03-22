@@ -1,16 +1,14 @@
 <template>
     <template v-if="chatsList && currentUser">
-        <div class="overflow-y-auto truncate">
-            <chat-item
-                v-for="chat in chatsList"
-                :key="chatsList._id"
-                :chat="chat"
-                :is-selected="selectedChatId === chat._id"
-                @selectChat="selectChat"
-                :chat-ids-pool="chatIdsPool"
-                :current-user="currentUser"
-            />
-        </div>
+        <chat-item
+            v-for="chat in chatsList"
+            :key="chatsList._id"
+            :chat="chat"
+            :is-selected="selectedChatId === chat._id"
+            @selectChat="selectChat"
+            :chat-ids-pool="chatIdsPool"
+            :current-user="currentUser"
+        />
     </template>
     <template v-else>
         <span class="p-2">{{ $t('No public chats') }}</span>
