@@ -4,6 +4,7 @@
     "Signup": "Регистрация",
     "Password": "Пароль",
     "Email": "Email",
+    "Country": "Страна",
     "Age": "Возраст",
     "Username": "Имя",
     "Gender": "Пол",
@@ -16,7 +17,7 @@
     "Join chat": "Присоединиться к чату",
     "No chats selected": "Нет выбранных чатов.",
     "No messages": "Новых сообщений нет.",
-    "Joined chat" : "Вы присоединились к чату.",
+    "Joined chat": "Вы присоединились к чату.",
     "Required": "Поле \"{name}\" обязательно к заполнению.",
     "Valid email": "Поле \"Email\" должно содержать правильный почтовый адрес.",
     "Min": "Поле \"{name}\" должно быть не менее {min} символов.",
@@ -26,7 +27,7 @@
     "User online": "Пользователь \"{username}\" сейчас в сети.",
     "User offline": "Пользователь \"{username}\" не в сети.",
     "Loading": "Ждите...",
-    "General data" : "Общие настройки",
+    "General data": "Общие настройки",
     "Successful login message": "Вы вошли в систему.",
     "Logout Message": "Вы вышли из системы.",
     "Logout": "Выйти",
@@ -55,5 +56,5 @@
     "Settings": "Настройки",
     "404 - Page not found": "404 - Страница не найдена",
     "Search": "Поиск",
-    "Information about user" : "Информация о пользователе"
+    "Information about user": "Информация о пользователе"
 }

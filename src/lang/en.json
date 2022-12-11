@@ -6,6 +6,7 @@
     "Email": "Email",
     "Age": "Age",
     "Username": "Username",
+    "Country": "Country",
     "Gender": "Gender",
     "Male": "Male",
     "Female": "Female",
@@ -13,7 +14,7 @@
     "Choose": "Choose",
     "Leave chat": "Leave the chat",
     "Left chat": "You have left the chat.",
-    "Joined chat" : "You have joined the chat.",
+    "Joined chat": "You have joined the chat.",
     "Join chat": "Join the chat",
     "No chats selected": "No chats selected.",
     "No messages": "No messages.",
@@ -40,7 +41,7 @@
     "Passwords must match": "Passwords must match.",
     "Firebase: Error (auth/user-not-found).": "User not found.",
     "Firebase: Error (auth/wrong-password).": "User not found.",
-    "Firebase: Error (auth/email-already-in-use).": "User already in use." ,
+    "Firebase: Error (auth/email-already-in-use).": "User already in use.",
     "Agree": "I accept the Terms of Use and Privacy policy.",
     "Reset password": "Reset password",
     "Instructions reset password": "Password reset instructions were sent to your email address.",
@@ -55,5 +56,5 @@
     "Settings": "Settings",
     "404 - Page not found": "404 - Page not found",
     "Search": "Search",
-    "Information about user" : "Information about user"
+    "Information about user": "Information about user"
 }

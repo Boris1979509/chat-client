@@ -4,6 +4,7 @@ import * as yup from 'yup'
 import { useStore } from 'vuex'
 import router from '@/router'
 import { useI18n } from 'vue-i18n'
+import { useCountries } from '@/use/countries'
 
 export const useAuthFirstSettings = () => {
     const { t } = useI18n() // translate
@@ -34,6 +35,10 @@ export const useAuthFirstSettings = () => {
                 t('Max', { name: t('Username'), max: USER_NAME_MAX_LENGTH })
             ),
         age: yup.string().required(t('Required', { name: t('Age') })),
+        country: yup
+            .string()
+            .nullable()
+            .required(t('Required', { name: t('Country') })),
         gender: yup.string().required(t('Required', { name: t('Gender') })),
     })
 
@@ -42,10 +47,14 @@ export const useAuthFirstSettings = () => {
     })
 
     const { value: username } = useField('username')
+    const { value: country } = useField('country')
     const { value: age } = useField('age')
     const { value: gender } = useField('gender')
 
-    gender.value = 'male' // Default gender
+    // Default values
+    gender.value = 'male'
+    age.value = AGE_FROM
+    country.value = useCountries().selected
 
     const onSubmit = handleSubmit(async (data) => {
         await store
@@ -56,11 +65,13 @@ export const useAuthFirstSettings = () => {
     return {
         username,
         age,
+        country,
         gender,
         OPTIONS,
         onSubmit,
         errors,
         isActiveFocus,
         isButtonLoading,
+        ...useCountries(),
     }
 }

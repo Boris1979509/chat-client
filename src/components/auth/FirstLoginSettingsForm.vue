@@ -12,13 +12,19 @@
                 v-model.trim="username"
                 :error-message="errors.username"
             />
-
             <app-select-input
                 label="Age"
                 name="age"
                 :options="OPTIONS"
                 v-model="age"
                 :error-message="errors.age"
+            />
+            <country-select
+                v-model="country"
+                label="Country"
+                :options="countries"
+                :error-message="errors.country"
+                :loading="loading"
             />
             <div class="flex flex-wrap gap-3">
                 <app-radio-input
@@ -46,10 +52,15 @@
 
 <script>
 import { useAuthFirstSettings } from '@/use/auth/first.settings'
+import CountrySelect from '@/components/plugins/multiselect/CountrySelect.vue'
+
 export default {
     name: 'FirstLoginSettingsForm',
     setup() {
         return { ...useAuthFirstSettings() }
+    },
+    components: {
+        CountrySelect,
     },
 }
 </script>

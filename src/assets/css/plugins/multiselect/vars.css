@@ -1,0 +1,9 @@
+.multiselect-green {
+    --ms-tag-bg: #f3eb0a;
+    --ms-tag-color: #059669;
+}
+
+.multiselect-blue {
+    --ms-tag-bg: #DBEAFE;
+    --ms-tag-color: #2563EB;
+}
